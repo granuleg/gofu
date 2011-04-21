@@ -1,0 +1,39 @@
+code lecture
+################################################################################
+SGF prefix are header file (structure,define)
+sgf prefix are c file(function)
+
+
+sgf_properties.h: list of node properties
+*prefix with SGF+two uppercase letter
+*id numeric value?
+
+sgftree.h:
+*define EMPTY/WHITE/BLACK (see board.h)
+*SGFProperty:next SGFProperty+ name short+value char*
+NB:
+name is a short=> modify with a fixed size UINT8 TODO
+value is a string of char=> modify with unicode TODO
+*SGFNode:child/parent/next SGFNode + props SGFProperties
+*SGFTree is a list of one root SGFNode + one lastnode SGFNode
+
+sgfnode.c:
+*allocating functions (xalloc,xrealloc,free)
+*node functions
+*property functions
+
+sgftree.c:
+main API functions
+
+
+how to use it
+################################################################################
+SGFTree my_sgf_tree
+sgftree_readfile(my_sgf_tree,"./gofu.sgf")
+
+
+
+
+
+
+

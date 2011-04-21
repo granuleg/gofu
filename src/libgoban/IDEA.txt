@@ -1,0 +1,57 @@
+Goban structure holds five categories:
+*grid
+*stone
+*marker
+*label
+*highlight
+Each category is separate as global (the whole boards) or local (a goban intersection).
+The globals categories describes style, stroke and fills patterns, stroke parameters,...
+The locals categories describes the presence or absence of each categories:
+*grid:NONE|PLAIN|STARPOINT
+*stone:NONE|BLACK|WHITE
+*marker:NONE|CROSS|TRIANGLE|DIAMOND|PENTAGON_STAR|CIRCLE|SQUARE|BRAND
+*highlight:NONE|HL1|....
+The drawing process is as follows
+1   )For global,
+
+1.1a)set the style of background				:NONE|COLOR|IMAGE|IMAGEPATTERN	(DONE)
+1.1b)set the color of background used for COLOR			:RGBA				(DONE)
+1.1c)set the image of background used for IMAGE and IMAGEPATTERN:FILENAME			(DONE)
+
+1.2a)set the style of grid dimension				:SQUARE|JAPANESE|...		(TODO ALL)
+1.2b)set the style of grid coordinate				:NONE|WESTERN|...		(TODO ALL)
+1.2c)set the style of grid intersection 			:LINE				(DONE)
+1.2d)set the style of grid boundary 				:NONE|BOLD			(DONE)
+1.2e)set the style of grid lighten				:NONE|LIGHT 			(DONE)
+1.2f)set the color of grid used for stroke PLAIN		:RGBA				(DONE)
+1.2f)set the color of grid used for stroke STARPOINT		:RGBA				(DONE)
+
+1.3a)set the style of stone	   				:PLAIN|VECTOR|IMAGE		(TODO IMAGE)
+1.3b)set the color used for stroke BLACK			:RGBA				(FIND ANOTHER APPROCH)
+1.3c)set the color used for fill BLACK				:RGBA				(FIND ANOTHER APPROCH)
+1.3d)set the color used for stroke WHITE			:RGBA				(FIND ANOTHER APPROCH)
+1.3e)set the color used for fill WHITE				:RGBA				(FIND ANOTHER APPROCH)
+1.3e)same thing for radial vector				:RGBA				(FIND ANOTHER APPROCH)
+
+1.4)same thing for marker					:RGBA				(FIND ANOTHER APPROCH)
+
+1.4)same thing for label					:RGBA				(FIND ANOTHER APPROCH)
+
+2   )For global, draw the background
+
+3   )For each local intersection, draw
+3.1 )The grid with args starpoint				:with/without starpoint		(DONE)
+3.1a)Draw the grid 						:	      			(DONE)
+The lighten algorithm do not draw grid between stones 		:				(DONE)
+The boundary algorithm draw boundary line as bold     	   	:  		    	     	(DONE)     	   	   		    	  
+3.1b)Draw the starpoint						:				(DONE)
+3.2 )The stones	   						:	      			(DONE)
+3.2 )The markers	   					:	      			(DONE)
+3.3 )The labels							:				(DONE)
+3.3 )The highlight	   					:	      			(DONE)
+
+
+
+
+
+
