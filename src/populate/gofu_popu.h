@@ -25,3 +25,21 @@ typedef struct _gofu_popu
   guint8 highlight;
   GString *label;
 } gofu_popu_t;
+
+void gofu_popu_init (gofu_t *);
+void gofu_popu_init_grid (gofu_t *);
+void gofu_popu_init_grid_liberty (gofu_t *);
+void gofu_popu_init_grid_starpoint (gofu_t *);
+void gofu_popu_init_grid_starpoint_tengen (gofu_t *);
+guint8 gofu_popu_init_grid_starpoint_corner_delta (gofu_t *);
+void gofu_popu_init_grid_starpoint_corner (gofu_t *, guint8);
+void gofu_popu_init_grid_starpoint_side (gofu_t *, guint8);
+void gofu_popu_init_stone (gofu_t *);
+void gofu_popu_init_marker (gofu_t *);
+void gofu_popu_init_label (gofu_t *);
+void gofu_popu_init_highlight (gofu_t *);
+void gofu_popu_init_grid_random (gofu_t *);
+void gofu_popu_init_stone_random (gofu_t *);
+void gofu_popu_init_marker_random (gofu_t *);
+void gofu_popu_init_label_random (gofu_t *);
+void gofu_popu_init_highlight_random (gofu_t *);

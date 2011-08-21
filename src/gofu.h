@@ -11,24 +11,6 @@ typedef struct _gofu
 } gofu_t;
 
 
-/*init structure*/
-void gofu_init_popu (gofu_t *);
-void gofu_init_popu_grid (gofu_t *);
-void gofu_init_popu_grid_liberty (gofu_t *);
-void gofu_init_popu_grid_starpoint (gofu_t *);
-void gofu_init_popu_grid_starpoint_tengen (gofu_t *);
-guint8 gofu_init_popu_grid_starpoint_corner_delta (gofu_t *);
-void gofu_init_popu_grid_starpoint_corner (gofu_t *, guint8);
-void gofu_init_popu_grid_starpoint_side (gofu_t *, guint8);
-void gofu_init_popu_stone (gofu_t *);
-void gofu_init_popu_marker (gofu_t *);
-void gofu_init_popu_label (gofu_t *);
-void gofu_init_popu_highlight (gofu_t *);
-void gofu_init_popu_grid_random (gofu_t *);
-void gofu_init_popu_stone_random (gofu_t *);
-void gofu_init_popu_marker_random (gofu_t *);
-void gofu_init_popu_label_random (gofu_t *);
-void gofu_init_popu_highlight_random (gofu_t *);
 
 /*graphics stuff*/
 void gofu_SL_stdout (gofu_t *);
