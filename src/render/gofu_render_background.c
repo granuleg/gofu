@@ -1,3 +1,5 @@
+#include "gofu_render_grid_background.h"
+
 void
 gofu_render_grid_background (cairo_t * cr, gofu_t * gofup)
 {

@@ -14,8 +14,8 @@ gofu_alloc (guint8 x, guint8 y)
   gofup->length = y;
   if ((gofup->popu =
        (gofu_popu_t **) gofu_alloc_popu (sizeof (gofu_popu_t),
-					     (gofup->width) + bounding_box,
-					     (gofup->length) + bounding_box)) ==
+					 (gofup->width) + bounding_box,
+					 (gofup->length) + bounding_box)) ==
       NULL)
     return NULL;
   return gofup;

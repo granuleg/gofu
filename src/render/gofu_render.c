@@ -111,7 +111,8 @@ cairo_uniform_stroke (cairo_t * cr)
 void
 gofu_cairo_set_color (cairo_t * cr, gofu_color_rgofupa_t color)
 {
-  cairo_set_source_rgofupa (cr, color.red, color.green, color.blue, color.alpha);
+  cairo_set_source_rgofupa (cr, color.red, color.green, color.blue,
+			    color.alpha);
 }
 
 gdouble
@@ -121,9 +122,8 @@ gofu_popuwidth_to_user (gofu_t * gofup, guint8 i)
   if (i == 0)
     return 0;
   else if (i == gofup->width + 1)
-    return ((2 * gofup->param.grid.liberty.margin_width) +((gofup->width - 1) *
-							 gofup->param.
-							 grid.liberty.spacing_width));
+    return ((2 * gofup->param.grid.liberty.margin_width) +
+	    ((gofup->width - 1) * gofup->param.grid.liberty.spacing_width));
   else
     return (gofup->param.grid.liberty.margin_width +
 	    ((i - 1) * gofup->param.grid.liberty.spacing_width));

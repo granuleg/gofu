@@ -60,4 +60,3 @@ gofu_cairo_grid_starpoint_SE_square (cairo_t * cr)
 {
   cairo_rectangle (cr, 0.0, 0.0, 1.0, 1.0);
 }
-

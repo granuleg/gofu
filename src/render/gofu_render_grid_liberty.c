@@ -65,7 +65,8 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gofup, guint8 i, guint8 j)
 	  cairo_save (cr);
 	  cairo_uniform_stroke (cr);
 	  cairo_restore (cr);
-	  cairo_set_line_width (cr, gofup->param.grid.liberty.thickness_bound);
+	  cairo_set_line_width (cr,
+				gofup->param.grid.liberty.thickness_bound);
 	  if (gridE != GRID_NONE && detectE)
 	    gofu_render_grid_liberty_E (cr, gofup);
 	  cairo_rotate (cr, G_PI_2);
@@ -139,7 +140,8 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gofup, guint8 i, guint8 j)
 	  cairo_save (cr);
 	  cairo_uniform_stroke (cr);
 	  cairo_restore (cr);
-	  cairo_set_line_width (cr, gofup->param.grid.liberty.thickness_bound);
+	  cairo_set_line_width (cr,
+				gofup->param.grid.liberty.thickness_bound);
 	  if (gridE != GRID_NONE && stoneE == STONE_NONE && detectE)
 	    gofu_render_grid_liberty_E (cr, gofup);
 	  cairo_rotate (cr, G_PI_2);

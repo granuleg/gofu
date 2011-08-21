@@ -636,8 +636,9 @@ goban_localwidth_to_user (goban_t * gb, guint8 i)
     return 0;
   else if (i == gb->width + 1)
     return ((2 * gb->global.grid.liberty.margin_width) +((gb->width - 1) *
-							 gb->global.
-							 grid.liberty.spacing_width));
+							 gb->global.grid.
+							 liberty.
+							 spacing_width));
   else
     return (gb->global.grid.liberty.margin_width +
 	    ((i - 1) * gb->global.grid.liberty.spacing_width));

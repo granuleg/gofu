@@ -80,7 +80,8 @@ goban_popu_init_grid_starpoint_corner (goban_t * gofup, guint8 delta)
   gofup->popu[1 + delta][1 + delta].grid = GRID_STARPOINT;
   gofup->popu[gofup->width - delta][1 + delta].grid = GRID_STARPOINT;
   gofup->popu[1 + delta][gofup->length - delta].grid = GRID_STARPOINT;
-  gofup->popu[gofup->width - delta][gofup->length - delta].grid = GRID_STARPOINT;
+  gofup->popu[gofup->width - delta][gofup->length - delta].grid =
+    GRID_STARPOINT;
 }
 
 void
