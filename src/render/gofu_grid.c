@@ -120,3 +120,32 @@ gofu_grid_starpoint_detect_NE (guint8 neighbour)
   else
     return FALSE;
 }
+
+gdouble
+gofu_popuwidth_to_user (gofu_t * gofup, guint8 i)
+{
+  assert (i <= gofup->width + 1);
+  if (i == 0)
+    return 0;
+  else if (i == gofup->width + 1)
+    return ((2 * gofup->param.grid.liberty.margin_width) +
+	    ((gofup->width - 1) * gofup->param.grid.liberty.spacing_width));
+  else
+    return (gofup->param.grid.liberty.margin_width +
+	    ((i - 1) * gofup->param.grid.liberty.spacing_width));
+}
+
+gdouble
+gofu_populength_to_user (gofu_t * gofup, guint8 j)
+{
+  assert (j <= gofup->length + 1);
+  if (j == 0)
+    return 0;
+  else if (j == gofup->length + 1)
+    return ((2 * gofup->param.grid.liberty.margin_length) +
+	    ((gofup->length - 1) * gofup->param.grid.liberty.spacing_length));
+  else
+    return (gofup->param.grid.liberty.margin_length +
+	    ((j - 1) * gofup->param.grid.liberty.spacing_length));
+}
+

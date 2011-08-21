@@ -6,7 +6,7 @@
 #define MAX_MARKER_RADIUS (3.0-G_SQRT5)/2.0
 
 void
-gofu_sensei_library_stdout (gofu_t * gofup)
+gofu_render_senseilibrary (gofu_t * gofup)
 {
   /*$$ */
   /* X:plain black stone */
@@ -102,43 +102,87 @@ gofu_sensei_library_stdout (gofu_t * gofup)
 }
 
 void
-cairo_uniform_stroke (cairo_t * cr)
+gofu_render_pangocairo (cairo_t * cr, gofu_t * gofup)
 {
-  cairo_identity_matrix (cr);
-  cairo_stroke (cr);
-}
-
-void
-gofu_cairo_set_color (cairo_t * cr, gofu_color_rgofupa_t color)
-{
-  cairo_set_source_rgofupa (cr, color.red, color.green, color.blue,
-			    color.alpha);
-}
-
-gdouble
-gofu_popuwidth_to_user (gofu_t * gofup, guint8 i)
-{
-  assert (i <= gofup->width + 1);
-  if (i == 0)
-    return 0;
-  else if (i == gofup->width + 1)
-    return ((2 * gofup->param.grid.liberty.margin_width) +
-	    ((gofup->width - 1) * gofup->param.grid.liberty.spacing_width));
-  else
-    return (gofup->param.grid.liberty.margin_width +
-	    ((i - 1) * gofup->param.grid.liberty.spacing_width));
-}
-
-gdouble
-gofu_populength_to_user (gofu_t * gofup, guint8 j)
-{
-  assert (j <= gofup->length + 1);
-  if (j == 0)
-    return 0;
-  else if (j == gofup->length + 1)
-    return ((2 * gofup->param.grid.liberty.margin_length) +
-	    ((gofup->length - 1) * gofup->param.grid.liberty.spacing_length));
-  else
-    return (gofup->param.grid.liberty.margin_length +
-	    ((j - 1) * gofup->param.grid.liberty.spacing_length));
+  guint8 i, j;
+  gofu_render_grid_background (cr, gofup);
+  for (i = 1; i <= gofup->width; i++)
+    {
+      for (j = 1; j <= gofup->length; j++)
+	{
+	  switch (gofup->local[i][j].grid)
+	    {
+	    case GRID_NONE:
+	      break;
+	    case GRID_PLAIN:
+	      gofu_render_grid_liberty (cr, gofup, i, j);
+	      break;
+	    case GRID_STARPOINT:
+	      gofu_render_grid_liberty (cr, gofup, i, j);
+	      gofu_render_grid_starpoint (cr, gofup, i, j);
+	      break;
+	    default:
+	      g_printf ("%d\n", __LINE__);
+	      exit (EXIT_FAILURE);
+	      break;
+	    }
+	  switch (gofup->local[i][j].stone)
+	    {
+	    case STONE_NONE:
+	      break;
+	    case STONE_BLACK:
+	      gofu_render_stone_black (cr, gofup, i, j);
+	      break;
+	    case STONE_WHITE:
+	      gofu_render_stone_white (cr, gofup, i, j);
+	      break;
+	    default:
+	      g_printf ("%d\n", __LINE__);
+	      exit (EXIT_FAILURE);
+	      break;
+	    }
+	  switch (gofup->local[i][j].marker)
+	    {
+	    case MARKER_NONE:
+	      break;
+	    case MARKER_TRIANGLE:
+	      gofu_render_marker_triangle (cr, gofup, i, j);
+	      break;
+	    case MARKER_DIAMOND:
+	      gofu_render_marker_diamond (cr, gofup, i, j);
+	      break;
+	    case MARKER_CROSS:
+	      gofu_render_marker_cross (cr, gofup, i, j);
+	      break;
+	    case MARKER_PENTAGON_STAR:
+	      gofu_render_marker_pentagon_star (cr, gofup, i, j);
+	      break;
+	    case MARKER_CIRCLE:
+	      gofu_render_marker_circle (cr, gofup, i, j);
+	      break;
+	    case MARKER_SQUARE:
+	      gofu_render_marker_square (cr, gofup, i, j);
+	      break;
+	    default:
+	      g_printf ("%d\n", __LINE__);
+	      exit (EXIT_FAILURE);
+	      break;
+	    }
+	  if ((g_strcmp0 ((gofup->local[i][j].label)->str, "") != 0)
+	      && (gofup->local[i][j].marker == MARKER_NONE))
+	    gofu_pangocairo_label (cr, gofup, i, j);
+	  switch (gofup->local[i][j].highlight)
+	    {
+	    case HIGHLIGHT_NONE:
+	      break;
+	    case HIGHLIGHT_HL1:
+	      gofu_render_color_hl1 (cr, gofup, i, j);
+	      break;
+	    default:
+	      g_printf ("%d\n", __LINE__);
+	      exit (EXIT_FAILURE);
+	      break;
+	    }
+	}
+    }
 }
