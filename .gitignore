@@ -1,5 +1,5 @@
-.anjuta/
-.anjuta_sym_db.db
+*.*~
+*.o
 Makefile
 Makefile.in
 TODO.tasks

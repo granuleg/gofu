@@ -1,5 +1,6 @@
-#include "gofu_parameter.h"
-#include "gofu_populate.h"
+#include "./parameter/gofu_param.h"
+#include "./populate/gofu_popu.h"
+
 
 typedef struct _gofu
 {
@@ -10,29 +11,7 @@ typedef struct _gofu
 } gofu_t;
 
 
-/*handle structure dynamicaly*/
-gofu_t *gofu_alloc (guint8, guint8);
-gpointer *gofu_alloc_popu (gsize, guint8, guint8);
-void gofu_free (gofu_t *);
-void gofu_free_popu_internal (gofu_t *);
-void gofu_free_popu (gpointer *, guint8);
-void gofu_free_param_internal (gofu_t *);
-
 /*init structure*/
-void gofu_init (gofu_t *);
-gdouble box_in_box (gdouble, gdouble, gdouble, gdouble);
-void gofu_init_param_parameter (gofu_t *, gofu_param_description_t *,
-				  gofu_param_ratio_size_t *,
-				  gofu_param_ratio_thickness_t *);
-void gofu_init_param_attribute (gofu_t *);
-void gofu_init_param_grid (gofu_t *);
-void gofu_init_param_grid_background (gofu_t *);
-void gofu_init_param_grid_liberty (gofu_t *);
-void gofu_init_param_grid_starpoint (gofu_t *);
-void gofu_init_param_stone (gofu_t *);
-void gofu_init_param_marker (gofu_t *);
-void gofu_init_param_label (gofu_t *);
-void gofu_init_param_highlight (gofu_t *);
 void gofu_init_popu (gofu_t *);
 void gofu_init_popu_grid (gofu_t *);
 void gofu_init_popu_grid_liberty (gofu_t *);
@@ -55,8 +34,7 @@ void gofu_init_popu_highlight_random (gofu_t *);
 void gofu_SL_stdout (gofu_t *);
 
 void cairo_uniform_stroke (cairo_t * cr);
-void gofu_init_param_color (gofu_color_rgba_t *, guint8, guint8,
-			      guint8, guint8);
+
 void gofu_cairo_set_color (cairo_t *, gofu_color_rgba_t);
 
 gdouble gofu_popuwidth_to_user (gofu_t *, guint8);
