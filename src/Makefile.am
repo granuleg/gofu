@@ -1,1 +1,1 @@
-SUBDIRS = libgoban
+SUBDIRS = parameter populate render

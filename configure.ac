@@ -5,5 +5,5 @@ AC_PROG_CC
 AC_HEADER_STDC
 PKG_CHECK_MODULES(PANGOCAIRO, pangocairo >= 1.24.5)
 AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_FILES([Makefile src/Makefile src/libgoban/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile])
 AC_OUTPUT

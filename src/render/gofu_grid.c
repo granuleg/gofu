@@ -148,4 +148,3 @@ gofu_populength_to_user (gofu_t * gofup, guint8 j)
     return (gofup->param.grid.liberty.margin_length +
 	    ((j - 1) * gofup->param.grid.liberty.spacing_length));
 }
-
