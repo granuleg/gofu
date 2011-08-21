@@ -10,7 +10,8 @@ gofu_param_ratio_thickness_t ratio_thickness = { 1, 1, 1, 1 };
 void
 gofu_param_init (gofu_t * gofup)
 {
-  gofu_param_init_dimension (gofup, &jp_standard, &ratio_size, &ratio_thickness);
+  gofu_param_init_dimension (gofup, &jp_standard, &ratio_size,
+			     &ratio_thickness);
   gofu_param_init_attribute (gofup);
 }
 
@@ -35,8 +36,8 @@ box_in_box (gdouble x, gdouble y, gdouble a, gdouble b)
 
 void
 gofu_param_init_dimension (gofu_t * gofup, gofu_param_description_t * desc,
-		 gofu_param_ratio_size_t * rsize,
-		 gofu_param_ratio_thickness_t * rthickness)
+			   gofu_param_ratio_size_t * rsize,
+			   gofu_param_ratio_thickness_t * rthickness)
 {
   gdouble scale;
   gdouble margin_width;

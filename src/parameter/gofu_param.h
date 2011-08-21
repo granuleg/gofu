@@ -121,8 +121,8 @@ typedef struct _gofu_param
 void gofu_param_init (gofu_t *);
 gdouble box_in_box (gdouble, gdouble, gdouble, gdouble);
 void gofu_param_init_dimension (gofu_t *, gofu_param_description_t *,
-				  gofu_param_ratio_size_t *,
-				  gofu_param_ratio_thickness_t *);
+				gofu_param_ratio_size_t *,
+				gofu_param_ratio_thickness_t *);
 void gofu_param_init_attribute (gofu_t *);
 void gofu_param_init_grid (gofu_t *);
 void gofu_param_init_grid_background (gofu_t *);
@@ -133,4 +133,4 @@ void gofu_param_init_marker (gofu_t *);
 void gofu_param_init_label (gofu_t *);
 void gofu_param_init_highlight (gofu_t *);
 void gofu_param_init_color (gofu_color_rgba_t *, guint8, guint8,
-			      guint8, guint8);
+			    guint8, guint8);

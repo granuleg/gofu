@@ -1,2 +1,2 @@
 #!/bin/sh
-find . -name "*.[c|h]" | xargs etags -e
+find src -name "*.[c|h]" | xargs etags -a
