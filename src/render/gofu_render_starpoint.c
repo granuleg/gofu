@@ -1,3 +1,5 @@
+#include "gofu_render_grid_starpoint.h"
+
 void
 gofu_render_grid_starpoint (cairo_t * cr, gofu_t * gofup, guint8 i, guint8 j)
 {
@@ -31,7 +33,7 @@ gofu_render_grid_starpoint (cairo_t * cr, gofu_t * gofup, guint8 i, guint8 j)
 
 
 void
-gofu_cairo_grid_starpoint_SE (cairo_t * cr, gofu_t * gofup)
+gofu_render_grid_starpoint_SE (cairo_t * cr, gofu_t * gofup)
 {
   switch (gofup->param.grid.starpoint.style)
     {
@@ -49,14 +51,14 @@ gofu_cairo_grid_starpoint_SE (cairo_t * cr, gofu_t * gofup)
 }
 
 void
-gofu_cairo_grid_starpoint_SE_round (cairo_t * cr)
+gofu_render_grid_starpoint_SE_round (cairo_t * cr)
 {
   cairo_arc (cr, 0., 0., 1., 0., G_PI_2);
   cairo_close_path (cr);
 }
 
 void
-gofu_cairo_grid_starpoint_SE_square (cairo_t * cr)
+gofu_render_grid_starpoint_SE_square (cairo_t * cr)
 {
   cairo_rectangle (cr, 0.0, 0.0, 1.0, 1.0);
 }

@@ -1,3 +1,4 @@
+#include "gofu_render_grid_liberty.h"
 
 void
 gofu_render_grid_liberty (cairo_t * cr, gofu_t * gofup, guint8 i, guint8 j)
