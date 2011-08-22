@@ -32,23 +32,30 @@ typedef struct _gofu_popu
 {
   guint8 width;
   guint8 length;
-  gofu_popu_elem_t **gp;
+  gofu_popu_elem_t **elem;
 } gofu_popu_t;
 
-void gofu_popu (gofu_popu_t *);
-void gofu_popu_grid (gofu_popu_t *);
-void gofu_popu_grid_liberty (gofu_popu_t *);
-void gofu_popu_grid_starpoint (gofu_popu_t *);
-void gofu_popu_grid_starpoint_tengen (gofu_popu_t *);
-guint8 gofu_popu_grid_starpoint_corner_delta (gofu_popu_t *);
-void gofu_popu_grid_starpoint_corner (gofu_popu_t *, guint8);
-void gofu_popu_grid_starpoint_side (gofu_popu_t *, guint8);
-void gofu_popu_stone (gofu_popu_t *);
-void gofu_popu_marker (gofu_popu_t *);
-void gofu_popu_label (gofu_popu_t *);
-void gofu_popu_highlight (gofu_popu_t *);
-void gofu_popu_grid_random (gofu_popu_t *);
-void gofu_popu_stone_random (gofu_popu_t *);
-void gofu_popu_marker_random (gofu_popu_t *);
-void gofu_popu_label_random (gofu_popu_t *);
-void gofu_popu_highlight_random (gofu_popu_t *);
+gofu_popu_t *gofu_popu_alloc (guint8, guint8);
+gpointer *gofu_popu_alloc_elem (gsize, guint8, guint8);
+
+void gofu_popu_free (gofu_popu_t *);
+void gofu_popu_free_internal (gofu_popu_t *);
+void gofu_popu_free_structure (gpointer *, guint8);
+
+void gofu_popu_init (gofu_popu_init_t *);
+void gofu_popu_init_grid (gofu_popu_init_t *);
+void gofu_popu_init_grid_liberty (gofu_popu_init_t *);
+void gofu_popu_init_grid_starpoint (gofu_popu_init_t *);
+void gofu_popu_init_grid_starpoint_tengen (gofu_popu_init_t *);
+guint8 gofu_popu_init_grid_starpoint_corner_delta (gofu_popu_init_t *);
+void gofu_popu_init_grid_starpoint_corner (gofu_popu_init_t *, guint8);
+void gofu_popu_init_grid_starpoint_side (gofu_popu_init_t *, guint8);
+void gofu_popu_init_stone (gofu_popu_init_t *);
+void gofu_popu_init_marker (gofu_popu_init_t *);
+void gofu_popu_init_label (gofu_popu_init_t *);
+void gofu_popu_init_highlight (gofu_popu_init_t *);
+void gofu_popu_init_grid_random (gofu_popu_init_t *);
+void gofu_popu_init_stone_random (gofu_popu_init_t *);
+void gofu_popu_init_marker_random (gofu_popu_init_t *);
+void gofu_popu_init_label_random (gofu_popu_init_t *);
+void gofu_popu_init_highlight_random (gofu_popu_init_t *);

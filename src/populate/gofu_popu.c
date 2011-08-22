@@ -1,59 +1,125 @@
 #include "gofu_popu.h"
 
-void
-goban_popu (gofu_popu_t * gp)
+static guint8 bounding_box = 2;
+
+gofu_popu_t *
+gofu_popu_alloc (guint8 width, guint8 length)
 {
-  goban_popu_grid (gp);
-  //goban_popu_grid_random (gp);
-  goban_popu_stone_random (gp);
-  goban_popu_marker (gp);
-  //goban_popu_marker_random (gp);
-  goban_popu_label (gp);
-  //goban_popu_label_random (gp);
-  goban_popu_highlight (gp);
-  //goban_popu_highlight_random (gp);
+  gofu_popu_t *gp;
+
+  gp->width = width;
+  gp->length = length;
+  if ((gp->popu =
+       (gofu_popu_t **) gofu_popu_alloc_elem (sizeof (gofu_popu_elem_t),
+					 (gp->width) + bounding_box,
+					 (gp->length) + bounding_box)) ==
+      NULL)
+    return NULL;
+  return gp;
+}
+
+gpointer *
+gofu_popu_alloc_elem (gsize elem_size, guint8 width, guint8 length)
+{
+  gpointer *elem;
+  guint8 temp;
+
+  if ((elem = (gpointer *) g_malloc0 (width * sizeof (gpointer))) == NULL)
+    return NULL;
+  for (temp = 0; temp < width; temp++)
+    {
+      if ((elem[temp] = (gpointer) g_malloc0 (length * elem_size)) == NULL)
+	return NULL;
+    }
+  return elem;
 }
 
 void
-goban_popu_grid (gofu_popu_t * gp)
+gofu_popu_free (gofu_popu_t * gp)
 {
-  goban_popu_grid_liberty (gp);
-  goban_popu_grid_starpoint (gp);
+  gofu_popu_free_internal (gp);
+  gofu_popu_free_structure ((gpointer *) gp->elem, (gp->width) + bounding_box);
+  g_free ((gpointer) gp);
 }
 
 void
-goban_popu_grid_liberty (gofu_popu_t * gp)
+gofu_popu_free_internal (gofu_popu_t * gp)
+{
+  guint8 i, j;
+  for (i = 0; i <= gp->width + 1; i++)
+    {
+      for (j = 0; j <= gp->length + 1; j++)
+	{
+	  g_string_free (gp->elem[i][j].label, TRUE);
+	}
+    }
+}
+
+void
+gofu_popu_free_structure (gpointer * elem, guint8 width)
+{
+  guint8 temp;
+  for (temp = 0; temp < width; temp++)
+    {
+      g_free (elem[temp]);
+    }
+  g_free (elem);
+}
+
+void
+gofu_popu_init (gofu_popu_t * gp)
+{
+  gofu_popu_init_grid (gp);
+  //gofu_popu_init_grid_random (gp);
+  gofu_popu_init_stone_random (gp);
+  gofu_popu_init_marker (gp);
+  //gofu_popu_init_marker_random (gp);
+  gofu_popu_init_label (gp);
+  //gofu_popu_init_label_random (gp);
+  gofu_popu_init_highlight (gp);
+  //gofu_popu_init_highlight_random (gp);
+}
+
+void
+gofu_popu_init_grid (gofu_popu_t * gp)
+{
+  gofu_popu_init_grid_liberty (gp);
+  gofu_popu_init_grid_starpoint (gp);
+}
+
+void
+gofu_popu_init_grid_liberty (gofu_popu_t * gp)
 {
   guint8 i, j;
   for (i = 1; i <= gp->width; i++)
     {
       for (j = 1; j <= gp->length; j++)
-	gp[i][j].grid = GRID_PLAIN;
+	gp->elem[i][j].grid = GRID_PLAIN;
     }
 }
 
 void
-goban_popu_grid_starpoint (gofu_popu_t * gp)
+gofu_popu_init_grid_starpoint (gofu_popu_t * gp)
 {
   guint8 delta;
-  goban_popu_grid_starpoint_tengen (gp);
-  delta = goban_popu_grid_starpoint_corner_delta (gp);
+  gofu_popu_init_grid_starpoint_tengen (gp);
+  delta = gofu_popu_init_grid_starpoint_corner_delta (gp);
   if (delta != 0)
     {
-      goban_popu_grid_starpoint_corner (gp, delta);
-      goban_popu_grid_starpoint_side (gp, delta);
+      gofu_popu_init_grid_starpoint_corner (gp, delta);
+      gofu_popu_init_grid_starpoint_side (gp, delta);
     }
 }
 
 void
-goban_popu_grid_starpoint_tengen (gofu_popu_t * gp)
+gofu_popu_init_grid_starpoint_tengen (gofu_popu_t * gp)
 {
   if ((gp->width % 2 == 1) && (gp->length % 2 == 1))
     gp[1 + (gp->width / 2)][1 + (gp->length / 2)].grid = GRID_STARPOINT;
 }
 
 guint8
-goban_popu_grid_starpoint_corner_delta (gofu_popu_t * gp)
+gofu_popu_init_grid_starpoint_corner_delta (gofu_popu_t * gp)
 {
   guint8 i, j, delta;
   if ((gp->width < 7) || (gp->length < 7))
@@ -74,7 +140,7 @@ goban_popu_grid_starpoint_corner_delta (gofu_popu_t * gp)
 }
 
 void
-goban_popu_grid_starpoint_corner (gofu_popu_t * gp, guint8 delta)
+gofu_popu_init_grid_starpoint_corner (gofu_popu_t * gp, guint8 delta)
 {
   gp[1 + delta][1 + delta].grid = GRID_STARPOINT;
   gp[gp->width - delta][1 + delta].grid = GRID_STARPOINT;
@@ -83,7 +149,7 @@ goban_popu_grid_starpoint_corner (gofu_popu_t * gp, guint8 delta)
 }
 
 void
-goban_popu_grid_starpoint_side (gofu_popu_t * gp, guint8 delta)
+gofu_popu_init_grid_starpoint_side (gofu_popu_t * gp, guint8 delta)
 {
   if ((gp->width % 2 == 1) && (gp->width - (2 * delta) >= 13))
     {
@@ -98,59 +164,59 @@ goban_popu_grid_starpoint_side (gofu_popu_t * gp, guint8 delta)
 }
 
 void
-goban_popu_stone (gofu_popu_t * gp)
+gofu_popu_init_stone (gofu_popu_t * gp)
 {
   guint8 i, j;
   for (i = 0; i <= gp->width + 1; i++)
     {
       for (j = 0; j <= gp->length + 1; j++)
 	{
-	  gp[i][j].stone = STONE_NONE;
+	  gp->elem[i][j].stone = STONE_NONE;
 	}
     }
 }
 
 void
-goban_popu_marker (gofu_popu_t * gp)
+gofu_popu_init_marker (gofu_popu_t * gp)
 {
   guint8 i, j;
   for (i = 0; i <= gp->width + 1; i++)
     {
       for (j = 0; j <= gp->length + 1; j++)
 	{
-	  gp[i][j].marker = MARKER_NONE;
+	  gp->elem[i][j].marker = MARKER_NONE;
 	}
     }
 }
 
 void
-goban_popu_label (gofu_popu_t * gp)
+gofu_popu_init_label (gofu_popu_t * gp)
 {
   guint8 i, j;
   for (i = 0; i <= gp->width + 1; i++)
     {
       for (j = 0; j <= gp->length + 1; j++)
 	{
-	  gp[i][j].label = g_string_new ("");
+	  gp->elem[i][j].label = g_string_new ("");
 	}
     }
 }
 
 void
-goban_popu_highlight (gofu_popu_t * gp)
+gofu_popu_init_highlight (gofu_popu_t * gp)
 {
   guint8 i, j;
   for (i = 0; i <= gp->width + 1; i++)
     {
       for (j = 0; j <= gp->length + 1; j++)
 	{
-	  gp[i][j].highlight = HIGHLIGHT_NONE;
+	  gp->elem[i][j].highlight = HIGHLIGHT_NONE;
 	}
     }
 }
 
 void
-goban_popu_grid_random (gofu_popu_t * gp)
+gofu_popu_init_grid_random (gofu_popu_t * gp)
 {
   guint8 i, j, temp;
   for (i = 1; i <= gp->width; i++)
@@ -161,13 +227,13 @@ goban_popu_grid_random (gofu_popu_t * gp)
 	  switch (temp)
 	    {
 	    case 0:
-	      gp[i][j].grid = GRID_NONE;
+	      gp->elem[i][j].grid = GRID_NONE;
 	      break;
 	    case 1:
-	      gp[i][j].grid = GRID_PLAIN;
+	      gp->elem[i][j].grid = GRID_PLAIN;
 	      break;
 	    case 2:
-	      gp[i][j].grid = GRID_STARPOINT;
+	      gp->elem[i][j].grid = GRID_STARPOINT;
 	      break;
 	    case 3:
 	      break;
@@ -181,7 +247,7 @@ goban_popu_grid_random (gofu_popu_t * gp)
 }
 
 void
-goban_popu_stone_random (gofu_popu_t * gp)
+gofu_popu_init_stone_random (gofu_popu_t * gp)
 {
   guint8 i, j, temp;
   for (i = 1; i <= gp->width; i++)
@@ -192,13 +258,13 @@ goban_popu_stone_random (gofu_popu_t * gp)
 	  switch (temp)
 	    {
 	    case 0:
-	      gp[i][j].stone = STONE_NONE;
+	      gp->elem[i][j].stone = STONE_NONE;
 	      break;
 	    case 1:
-	      gp[i][j].stone = STONE_WHITE;
+	      gp->elem[i][j].stone = STONE_WHITE;
 	      break;
 	    case 2:
-	      gp[i][j].stone = STONE_BLACK;
+	      gp->elem[i][j].stone = STONE_BLACK;
 	      break;
 	    default:
 	      g_printf ("%d\n", __LINE__);
@@ -210,7 +276,7 @@ goban_popu_stone_random (gofu_popu_t * gp)
 }
 
 void
-goban_popu_marker_random (gofu_popu_t * gp)
+gofu_popu_init_marker_random (gofu_popu_t * gp)
 {
   guint8 i, j, temp;
   for (i = 1; i <= gp->width; i++)
@@ -221,25 +287,25 @@ goban_popu_marker_random (gofu_popu_t * gp)
 	  switch (temp)
 	    {
 	    case 0:
-	      gp[i][j].marker = MARKER_NONE;
+	      gp->elem[i][j].marker = MARKER_NONE;
 	      break;
 	    case 1:
-	      gp[i][j].marker = MARKER_CROSS;
+	      gp->elem[i][j].marker = MARKER_CROSS;
 	      break;
 	    case 2:
-	      gp[i][j].marker = MARKER_TRIANGLE;
+	      gp->elem[i][j].marker = MARKER_TRIANGLE;
 	      break;
 	    case 3:
-	      gp[i][j].marker = MARKER_DIAMOND;
+	      gp->elem[i][j].marker = MARKER_DIAMOND;
 	      break;
 	    case 4:
-	      gp[i][j].marker = MARKER_PENTAGON_STAR;
+	      gp->elem[i][j].marker = MARKER_PENTAGON_STAR;
 	      break;
 	    case 5:
-	      gp[i][j].marker = MARKER_CIRCLE;
+	      gp->elem[i][j].marker = MARKER_CIRCLE;
 	      break;
 	    case 6:
-	      gp[i][j].marker = MARKER_SQUARE;
+	      gp->elem[i][j].marker = MARKER_SQUARE;
 	      break;
 	    default:
 	      g_printf ("%d\n", __LINE__);
@@ -251,7 +317,7 @@ goban_popu_marker_random (gofu_popu_t * gp)
 }
 
 void
-goban_popu_label_random (gofu_popu_t * gp)
+gofu_popu_init_label_random (gofu_popu_t * gp)
 {
   guint8 i, j, temp;
   char conv[2];
@@ -261,14 +327,14 @@ goban_popu_label_random (gofu_popu_t * gp)
 	{
 	  temp = g_random_int_range (33, 128);
 	  sprintf (conv, "%c", temp);
-	  gp[i][j].label = g_string_new ("");
-	  gp[i][j].label = g_string_assign (gp[i][j].label, conv);
+	  gp->elem[i][j].label = g_string_new ("");
+	  gp->elem[i][j].label = g_string_assign (gp->elem[i][j].label, conv);
 	}
     }
 }
 
 void
-goban_popu_highlight_random (gofu_popu_t * gp)
+gofu_popu_init_highlight_random (gofu_popu_t * gp)
 {
   guint8 i, j, temp;
   for (i = 1; i <= gp->width; i++)
@@ -279,10 +345,10 @@ goban_popu_highlight_random (gofu_popu_t * gp)
 	  switch (temp)
 	    {
 	    case 0:
-	      gp[i][j].highlight = HIGHLIGHT_NONE;
+	      gp->elem[i][j].highlight = HIGHLIGHT_NONE;
 	      break;
 	    case 1:
-	      gp[i][j].highlight = HIGHLIGHT_HL1;
+	      gp->elem[i][j].highlight = HIGHLIGHT_HL1;
 	      break;
 	    default:
 	      g_printf ("%d\n", __LINE__);
