@@ -1,5 +1,4 @@
 #include <glib.h>
-#include <cairo.h>
 
 typedef struct _gofu_color_rgba
 {
@@ -79,10 +78,8 @@ typedef struct _gofu_param_stone
   guint8 style;
   gofu_color_rgba_t color_white_stroke;
   gofu_color_rgba_t color_white_fill;
-  cairo_pattern_t *pattern_white_radial;
   gofu_color_rgba_t color_black_stroke;
   gofu_color_rgba_t color_black_fill;
-  cairo_pattern_t *pattern_black_radial;
 } gofu_param_stone_t;
 
 typedef struct _gofu_param_marker
@@ -120,19 +117,18 @@ typedef struct _gofu_param
   gofu_param_label_t label;
 } gofu_param_t;
 
-void gofu_param_init (gofu_param_t *);
+void gofu_param (gofu_param_t *);
 gdouble box_in_box (gdouble, gdouble, gdouble, gdouble);
-void gofu_param_init_dimension (gofu_param_t *, gofu_param_description_t *,
-				gofu_param_ratio_size_t *,
-				gofu_param_ratio_thickness_t *);
-void gofu_param_init_attribute (gofu_param_t *);
-void gofu_param_init_grid (gofu_param_t *);
-void gofu_param_init_grid_background (gofu_param_t *);
-void gofu_param_init_grid_liberty (gofu_param_t *);
-void gofu_param_init_grid_starpoint (gofu_param_t *);
-void gofu_param_init_stone (gofu_param_t *);
-void gofu_param_init_marker (gofu_param_t *);
-void gofu_param_init_label (gofu_param_t *);
-void gofu_param_init_highlight (gofu_param_t *);
-void gofu_param_init_color (gofu_color_rgba_t *, guint8, guint8,
-			    guint8, guint8);
+void gofu_param_dimension (gofu_param_t *, gofu_param_description_t *,
+			   gofu_param_ratio_size_t *,
+			   gofu_param_ratio_thickness_t *);
+void gofu_param_attribute (gofu_param_t *);
+void gofu_param_grid (gofu_param_t *);
+void gofu_param_grid_background (gofu_param_t *);
+void gofu_param_grid_liberty (gofu_param_t *);
+void gofu_param_grid_starpoint (gofu_param_t *);
+void gofu_param_stone (gofu_param_t *);
+void gofu_param_marker (gofu_param_t *);
+void gofu_param_label (gofu_param_t *);
+void gofu_param_highlight (gofu_param_t *);
+void gofu_param_color (gofu_color_rgba_t *, guint8, guint8, guint8, guint8);
