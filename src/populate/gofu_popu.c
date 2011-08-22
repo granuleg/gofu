@@ -9,8 +9,8 @@ gofu_popu_alloc (guint8 width, guint8 length)
 
   gp->width = width;
   gp->length = length;
-  if ((gp->popu =
-       (gofu_popu_t **) gofu_popu_alloc_elem (sizeof (gofu_popu_elem_t),
+  if ((gp->elem =
+       (gofu_popu_elem_t **) gofu_popu_alloc_elem (sizeof (gofu_popu_elem_t),
 					 (gp->width) + bounding_box,
 					 (gp->length) + bounding_box)) ==
       NULL)
@@ -115,7 +115,7 @@ void
 gofu_popu_init_grid_starpoint_tengen (gofu_popu_t * gp)
 {
   if ((gp->width % 2 == 1) && (gp->length % 2 == 1))
-    gp[1 + (gp->width / 2)][1 + (gp->length / 2)].grid = GRID_STARPOINT;
+    gp->elem[1 + (gp->width / 2)][1 + (gp->length / 2)].grid = GRID_STARPOINT;
 }
 
 guint8
@@ -142,10 +142,10 @@ gofu_popu_init_grid_starpoint_corner_delta (gofu_popu_t * gp)
 void
 gofu_popu_init_grid_starpoint_corner (gofu_popu_t * gp, guint8 delta)
 {
-  gp[1 + delta][1 + delta].grid = GRID_STARPOINT;
-  gp[gp->width - delta][1 + delta].grid = GRID_STARPOINT;
-  gp[1 + delta][gp->length - delta].grid = GRID_STARPOINT;
-  gp[gp->width - delta][gp->length - delta].grid = GRID_STARPOINT;
+  gp->elem[1 + delta][1 + delta].grid = GRID_STARPOINT;
+  gp->elem[gp->width - delta][1 + delta].grid = GRID_STARPOINT;
+  gp->elem[1 + delta][gp->length - delta].grid = GRID_STARPOINT;
+  gp->elem[gp->width - delta][gp->length - delta].grid = GRID_STARPOINT;
 }
 
 void
@@ -153,13 +153,13 @@ gofu_popu_init_grid_starpoint_side (gofu_popu_t * gp, guint8 delta)
 {
   if ((gp->width % 2 == 1) && (gp->width - (2 * delta) >= 13))
     {
-      gp[1 + (gp->width / 2)][1 + delta].grid = GRID_STARPOINT;
-      gp[1 + (gp->width / 2)][gp->length - delta].grid = GRID_STARPOINT;
+      gp->elem[1 + (gp->width / 2)][1 + delta].grid = GRID_STARPOINT;
+      gp->elem[1 + (gp->width / 2)][gp->length - delta].grid = GRID_STARPOINT;
     }
   if ((gp->length % 2 == 1) && ((gp->length - (2 * delta)) >= 13))
     {
-      gp[1 + delta][1 + (gp->length / 2)].grid = GRID_STARPOINT;
-      gp[gp->width - delta][1 + (gp->length / 2)].grid = GRID_STARPOINT;
+      gp->elem[1 + delta][1 + (gp->length / 2)].grid = GRID_STARPOINT;
+      gp->elem[gp->width - delta][1 + (gp->length / 2)].grid = GRID_STARPOINT;
     }
 }
 

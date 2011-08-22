@@ -1,4 +1,6 @@
 #include <glib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef enum _gofu_popu_enum
 {
@@ -42,20 +44,20 @@ void gofu_popu_free (gofu_popu_t *);
 void gofu_popu_free_internal (gofu_popu_t *);
 void gofu_popu_free_structure (gpointer *, guint8);
 
-void gofu_popu_init (gofu_popu_init_t *);
-void gofu_popu_init_grid (gofu_popu_init_t *);
-void gofu_popu_init_grid_liberty (gofu_popu_init_t *);
-void gofu_popu_init_grid_starpoint (gofu_popu_init_t *);
-void gofu_popu_init_grid_starpoint_tengen (gofu_popu_init_t *);
-guint8 gofu_popu_init_grid_starpoint_corner_delta (gofu_popu_init_t *);
-void gofu_popu_init_grid_starpoint_corner (gofu_popu_init_t *, guint8);
-void gofu_popu_init_grid_starpoint_side (gofu_popu_init_t *, guint8);
-void gofu_popu_init_stone (gofu_popu_init_t *);
-void gofu_popu_init_marker (gofu_popu_init_t *);
-void gofu_popu_init_label (gofu_popu_init_t *);
-void gofu_popu_init_highlight (gofu_popu_init_t *);
-void gofu_popu_init_grid_random (gofu_popu_init_t *);
-void gofu_popu_init_stone_random (gofu_popu_init_t *);
-void gofu_popu_init_marker_random (gofu_popu_init_t *);
-void gofu_popu_init_label_random (gofu_popu_init_t *);
-void gofu_popu_init_highlight_random (gofu_popu_init_t *);
+void gofu_popu_init (gofu_popu_t *);
+void gofu_popu_init_grid (gofu_popu_t *);
+void gofu_popu_init_grid_liberty (gofu_popu_t *);
+void gofu_popu_init_grid_starpoint (gofu_popu_t *);
+void gofu_popu_init_grid_starpoint_tengen (gofu_popu_t *);
+guint8 gofu_popu_init_grid_starpoint_corner_delta (gofu_popu_t *);
+void gofu_popu_init_grid_starpoint_corner (gofu_popu_t *, guint8);
+void gofu_popu_init_grid_starpoint_side (gofu_popu_t *, guint8);
+void gofu_popu_init_stone (gofu_popu_t *);
+void gofu_popu_init_marker (gofu_popu_t *);
+void gofu_popu_init_label (gofu_popu_t *);
+void gofu_popu_init_highlight (gofu_popu_t *);
+void gofu_popu_init_grid_random (gofu_popu_t *);
+void gofu_popu_init_stone_random (gofu_popu_t *);
+void gofu_popu_init_marker_random (gofu_popu_t *);
+void gofu_popu_init_label_random (gofu_popu_t *);
+void gofu_popu_init_highlight_random (gofu_popu_t *);
