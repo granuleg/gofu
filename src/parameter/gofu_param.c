@@ -8,11 +8,11 @@ gofu_param_ratio_size_t ratio_size = { G_SQRT2_2, G_SQRT2_2, 1. / 2, 1. / 4 };
 gofu_param_ratio_thickness_t ratio_thickness = { 1, 1, 1, 1 };
 
 void
-gofu_param_init (gofu_t * gofup)
+gofu_param_init (gofu_param_t * gpp, guint8 width, guint8 length)
 {
-  gofu_param_init_dimension (gofup, &jp_standard, &ratio_size,
+  gofu_param_init_dimension (gpp, &jp_standard, width, length, &ratio_size,
 			     &ratio_thickness);
-  gofu_param_init_attribute (gofup);
+  gofu_param_init_attribute (gpp);
 }
 
 gdouble
@@ -35,7 +35,8 @@ box_in_box (gdouble x, gdouble y, gdouble a, gdouble b)
 }
 
 void
-gofu_param_init_dimension (gofu_t * gofup, gofu_param_description_t * desc,
+gofu_param_init_dimension (gofu_param_t * gpp, guint8 width, guint8 length,
+			   gofu_param_description_t * desc,
 			   gofu_param_ratio_size_t * rsize,
 			   gofu_param_ratio_thickness_t * rthickness)
 {
@@ -51,40 +52,37 @@ gofu_param_init_dimension (gofu_t * gofup, gofu_param_description_t * desc,
     (desc->gofu_length -
      (desc->line_spacing_length * (desc->number_line_length - 1))) / 2;
   surface_width =
-    (desc->line_spacing_width * (gofup->width - 1)) + (2 * margin_width);
+    (desc->line_spacing_width * (width - 1)) + (2 * margin_width);
   surface_length =
-    (desc->line_spacing_length * (gofup->length - 1)) + (2 * margin_length);
+    (desc->line_spacing_length * (length - 1)) + (2 * margin_length);
   scale =
-    box_in_box (surface_width, surface_length, gofup->param.surface_width,
-		gofup->param.surface_length);
+    box_in_box (surface_width, surface_length, gpp->surface_width,
+		gpp->surface_length);
   //from description
-  gofup->param.grid.liberty.spacing_width = desc->line_spacing_width * scale;
-  gofup->param.grid.liberty.spacing_length =
-    desc->line_spacing_length * scale;
-  gofup->param.grid.liberty.margin_width = margin_width * scale;
-  gofup->param.grid.liberty.margin_length = margin_length * scale;
-  gofup->param.stone.radius =
+  gpp->grid.liberty.spacing_width = desc->line_spacing_width * scale;
+  gpp->grid.liberty.spacing_length = desc->line_spacing_length * scale;
+  gpp->grid.liberty.margin_width = margin_width * scale;
+  gpp->grid.liberty.margin_length = margin_length * scale;
+  gpp->stone.radius =
     (MIN (desc->line_spacing_width, desc->line_spacing_width) / 2) * scale;
   //from ratio size
-  gofup->param.marker.radius =
-    gofup->param.stone.radius * rsize->marker_stone;
-  gofup->param.grid.starpoint.radius =
-    gofup->param.marker.radius * rsize->starpoint_marker;
-  gofup->param.grid.liberty.thickness_bound =
-    gofup->param.grid.starpoint.radius * rsize->bound_starpoint;
-  gofup->param.grid.liberty.thickness =
-    gofup->param.grid.liberty.thickness_bound * rsize->unbound_bound;
+  gpp->marker.radius = gpp->stone.radius * rsize->marker_stone;
+  gpp->grid.starpoint.radius = gpp->marker.radius * rsize->starpoint_marker;
+  gpp->grid.liberty.thickness_bound =
+    gpp->grid.starpoint.radius * rsize->bound_starpoint;
+  gpp->grid.liberty.thickness =
+    gpp->grid.liberty.thickness_bound * rsize->unbound_bound;
   //from ratio thickness
-  gofup->param.grid.starpoint.thickness =
-    gofup->param.grid.liberty.thickness * rthickness->unbound_starpoint;
-  gofup->param.marker.thickness =
-    gofup->param.grid.liberty.thickness * rthickness->unbound_marker;
-  gofup->param.stone.thickness =
-    gofup->param.grid.liberty.thickness * rthickness->unbound_stone;
+  gpp->grid.starpoint.thickness =
+    gpp->grid.liberty.thickness * rthickness->unbound_starpoint;
+  gpp->marker.thickness =
+    gpp->grid.liberty.thickness * rthickness->unbound_marker;
+  gpp->stone.thickness =
+    gpp->grid.liberty.thickness * rthickness->unbound_stone;
 }
 
 void
-gofu_param_init_attribute (gofu_t * gofup)
+gofu_param_init_attribute (gofu_param_t * gpp)
 {
   gofu_param_init_grid (gofup);
   gofu_param_init_stone (gofup);
@@ -94,97 +92,85 @@ gofu_param_init_attribute (gofu_t * gofup)
 }
 
 void
-gofu_param_init_grid (gofu_t * gofup)
+gofu_param_init_grid (gofu_param_t * gpp)
 {
-  gofup->param.grid.style_boundary = 1;
-  gofup->param.grid.style_lighten = 1;
+  gpp->grid.style_boundary = 1;
+  gpp->grid.style_lighten = 1;
   gofu_param_init_grid_background (gofup);
   gofu_param_init_grid_liberty (gofup);
   gofu_param_init_grid_starpoint (gofup);
 }
 
 void
-gofu_param_init_grid_background (gofu_t * gofup)
+gofu_param_init_grid_background (gofu_param_t * gpp)
 {
-  gofup->param.grid.background.style = 1;
-  gofu_param_init_color (&gofup->param.grid.background.color_fill, 222, 176,
+  gpp->grid.background.style = 1;
+  gofu_param_init_color (&gpp->grid.background.color_fill, 222, 176,
 			 109, 255);
-  gofup->param.grid.background.image =
+  gpp->grid.background.image =
     g_string_new
     ("/home/granule/Documents/gofu/trunk/src/resource/resource/wood/test2.png");
 }
 
 void
-gofu_param_init_grid_liberty (gofu_t * gofup)
+gofu_param_init_grid_liberty (gofu_param_t * gpp)
 {
-  gofup->param.grid.liberty.style = 0;
-  gofu_param_init_color (&gofup->param.grid.liberty.color_stroke, 0, 0, 0,
-			 255);
+  gpp->grid.liberty.style = 0;
+  gofu_param_init_color (&gpp->grid.liberty.color_stroke, 0, 0, 0, 255);
 }
 
 void
-gofu_param_init_grid_starpoint (gofu_t * gofup)
+gofu_param_init_grid_starpoint (gofu_param_t * gpp)
 {
-  gofup->param.grid.starpoint.style = 0;
-  gofu_param_init_color (&gofup->param.grid.starpoint.color_stroke, 0, 0, 0,
-			 255);
+  gpp->grid.starpoint.style = 0;
+  gofu_param_init_color (&gpp->grid.starpoint.color_stroke, 0, 0, 0, 255);
 }
 
 void
-gofu_param_init_stone (gofu_t * gofup)
+gofu_param_init_stone (gofu_param_t * gpp)
 {
-  gofup->param.stone.style = 1;
-  gofu_param_init_color (&gofup->param.stone.color_black_stroke, 0, 0, 0,
-			 255);
-  gofu_param_init_color (&gofup->param.stone.color_black_fill, 0, 0, 0, 255);
-  gofu_param_init_color (&gofup->param.stone.color_white_stroke, 0, 0, 0,
-			 255);
-  gofu_param_init_color (&gofup->param.stone.color_white_fill, 255, 255, 255,
-			 255);
-  gofup->param.stone.pattern_black_radial =
+  gpp->stone.style = 1;
+  gofu_param_init_color (&gpp->stone.color_black_stroke, 0, 0, 0, 255);
+  gofu_param_init_color (&gpp->stone.color_black_fill, 0, 0, 0, 255);
+  gofu_param_init_color (&gpp->stone.color_white_stroke, 0, 0, 0, 255);
+  gofu_param_init_color (&gpp->stone.color_white_fill, 255, 255, 255, 255);
+  gpp->stone.pattern_black_radial =
     cairo_pattern_create_radial (-0.2, -0.2, 0., 0., 0., 1.);
-  cairo_pattern_add_color_stop_rgba (gofup->param.stone.pattern_black_radial,
+  cairo_pattern_add_color_stop_rgba (gpp->stone.pattern_black_radial,
 				     0., 1., 1., 1., 1.);
-  cairo_pattern_add_color_stop_rgba (gofup->param.stone.pattern_black_radial,
+  cairo_pattern_add_color_stop_rgba (gpp->stone.pattern_black_radial,
 				     1., 0., 0., 0., 1.);
-  gofup->param.stone.pattern_white_radial =
+  gpp->stone.pattern_white_radial =
     cairo_pattern_create_radial (-0.2, -0.2, 0., 0., 0., 1.);
-  cairo_pattern_add_color_stop_rgba (gofup->param.stone.pattern_white_radial,
+  cairo_pattern_add_color_stop_rgba (gpp->stone.pattern_white_radial,
 				     0., 0., 0., 0., 1.);
-  cairo_pattern_add_color_stop_rgba (gofup->param.stone.pattern_white_radial,
+  cairo_pattern_add_color_stop_rgba (gpp->stone.pattern_white_radial,
 				     1., 1., 1., 1., 1.);
 }
 
 void
-gofu_param_init_marker (gofu_t * gofup)
+gofu_param_init_marker (gofu_param_t * gpp)
 {
-  gofup->param.marker.style = 0;
-  gofu_param_init_color (&gofup->param.marker.color_black_stroke, 255, 255,
-			 255, 255);
-  gofu_param_init_color (&gofup->param.marker.color_black_fill, 255, 255, 255,
-			 255);
-  gofu_param_init_color (&gofup->param.marker.color_white_stroke, 0, 0, 0,
-			 255);
-  gofu_param_init_color (&gofup->param.marker.color_white_fill, 255, 255, 255,
-			 255);
-  gofu_param_init_color (&gofup->param.marker.color_none_stroke, 0, 0, 0,
-			 255);
-  gofu_param_init_color (&gofup->param.label.color_white_stroke, 0, 0, 0,
-			 255);
-  gofu_param_init_color (&gofup->param.label.color_black_stroke, 255, 255,
-			 255, 255);
+  gpp->marker.style = 0;
+  gofu_param_init_color (&gpp->marker.color_black_stroke, 255, 255, 255, 255);
+  gofu_param_init_color (&gpp->marker.color_black_fill, 255, 255, 255, 255);
+  gofu_param_init_color (&gpp->marker.color_white_stroke, 0, 0, 0, 255);
+  gofu_param_init_color (&gpp->marker.color_white_fill, 255, 255, 255, 255);
+  gofu_param_init_color (&gpp->marker.color_none_stroke, 0, 0, 0, 255);
+  gofu_param_init_color (&gpp->label.color_white_stroke, 0, 0, 0, 255);
+  gofu_param_init_color (&gpp->label.color_black_stroke, 255, 255, 255, 255);
 }
 
 void
-gofu_param_init_label (gofu_t * gofup)
+gofu_param_init_label (gofu_param_t * gpp)
 {
-  gofu_param_init_color (&gofup->param.label.color_none_stroke, 0, 0, 0, 255);
+  gofu_param_init_color (&gpp->label.color_none_stroke, 0, 0, 0, 255);
 }
 
 void
-gofu_param_highlight (gofu_t * gofup)
+gofu_param_highlight (gofu_param_t * gpp)
 {
-  gofu_param_init_color (&gofup->param.highlight.hl1, 10, 100, 100, 128);
+  gofu_param_init_color (&gpp->highlight.hl1, 10, 100, 100, 128);
 }
 
 void
