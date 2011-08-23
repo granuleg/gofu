@@ -7,13 +7,15 @@ gofu_popu_alloc (guint8 width, guint8 length)
 {
   gofu_popu_t *gp;
 
+  if ((gp = (gofu_popu_t *) g_malloc (sizeof (gofu_popu_t))) == NULL)
+    return NULL;
   gp->width = width;
   gp->length = length;
   if ((gp->elem =
        (gofu_popu_elem_t **) gofu_popu_alloc_elem (sizeof (gofu_popu_elem_t),
-					 (gp->width) + bounding_box,
-					 (gp->length) + bounding_box)) ==
-      NULL)
+						   (gp->width) + bounding_box,
+						   (gp->length) +
+						   bounding_box)) == NULL)
     return NULL;
   return gp;
 }
@@ -38,7 +40,8 @@ void
 gofu_popu_free (gofu_popu_t * gp)
 {
   gofu_popu_free_internal (gp);
-  gofu_popu_free_structure ((gpointer *) gp->elem, (gp->width) + bounding_box);
+  gofu_popu_free_structure ((gpointer *) gp->elem,
+			    (gp->width) + bounding_box);
   g_free ((gpointer) gp);
 }
 
