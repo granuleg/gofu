@@ -79,6 +79,9 @@ typedef struct _gofu_param
   gofu_param_label_t label;
 } gofu_param_t;
 
+gofu_param_t *gofu_param_alloc ();
+void gofu_param_free (gofu_param_t *);
+void gofu_param_free_string (gofu_param_t *);
 void gofu_param_init (gofu_param_t *);
 void gofu_param_init_grid (gofu_param_t *);
 void gofu_param_init_grid_background (gofu_param_t *);

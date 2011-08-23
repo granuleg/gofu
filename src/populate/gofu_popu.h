@@ -41,8 +41,8 @@ gofu_popu_t *gofu_popu_alloc (guint8, guint8);
 gpointer *gofu_popu_alloc_elem (gsize, guint8, guint8);
 
 void gofu_popu_free (gofu_popu_t *);
-void gofu_popu_free_internal (gofu_popu_t *);
-void gofu_popu_free_structure (gpointer *, guint8);
+void gofu_popu_free_string (gofu_popu_t *);
+void gofu_popu_free_elem (gpointer *, guint8);
 
 void gofu_popu_init (gofu_popu_t *);
 void gofu_popu_init_grid (gofu_popu_t *);

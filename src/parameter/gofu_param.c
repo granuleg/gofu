@@ -1,5 +1,29 @@
 #include "gofu_param.h"
 
+gofu_param_t *
+gofu_param_alloc (void)
+{
+  gofu_param_t *gp;
+  if ((gp = (gofu_param_t *) g_malloc (sizeof (gofu_param_t))) == NULL)
+    return NULL;
+  return gp;
+}
+
+void
+gofu_param_free (gofu_param_t * gp)
+{
+  gofu_param_free_string (gp);
+  g_free ((gpointer) gp);
+}
+
+void
+gofu_param_free_string (gofu_param_t * gp)
+{
+  g_string_free (gp->grid.background.image, TRUE);
+  g_string_free (gp->stone.image_black, TRUE);
+  g_string_free (gp->stone.image_white, TRUE);
+}
+
 void
 gofu_param_init (gofu_param_t * gp)
 {
@@ -15,9 +39,9 @@ gofu_param_init_grid (gofu_param_t * gp)
 {
   gp->grid.style_boundary = 0;
   gp->grid.style_lighten = 0;
-  gofu_param_grid_background (gp);
-  gofu_param_grid_liberty (gp);
-  gofu_param_grid_starpoint (gp);
+  gofu_param_init_grid_background (gp);
+  gofu_param_init_grid_liberty (gp);
+  gofu_param_init_grid_starpoint (gp);
 }
 
 void
