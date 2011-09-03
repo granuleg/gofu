@@ -4,5 +4,3 @@
 #include <cairo/cairo-ps.h>
 
 #include "render/gofu_render.h"
-
-

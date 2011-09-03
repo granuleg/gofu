@@ -13,7 +13,8 @@ gofu_param_size_t *
 gofu_param_size_alloc (void)
 {
   gofu_param_size_t *gp;
-  if ((gp = (gofu_param_size_t *) g_malloc (sizeof (gofu_param_size_t))) == NULL)
+  if ((gp =
+       (gofu_param_size_t *) g_malloc (sizeof (gofu_param_size_t))) == NULL)
     return NULL;
   return gp;
 }

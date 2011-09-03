@@ -17,7 +17,7 @@ gofu_create (guint8 width, guint8 length)
 }
 
 void
-gofu_destroy (gofu_t *gp)
+gofu_destroy (gofu_t * gp)
 {
   gofu_popu_free (gp->popu);
   gofu_param_free (gp->param);
@@ -31,7 +31,7 @@ main (void)
   cairo_surface_t *surface;
   cairo_t *cr;
   gofu_t *gp;
-  gp = gofu_create(17,17);
+  gp = gofu_create (17, 17);
   gp->param_size->surface_width = 210 * (72 / 25.4);
   gp->param_size->surface_length = 297 * (72 / 25.4);
   surface =
@@ -42,6 +42,6 @@ main (void)
   cairo_surface_write_to_png (surface, "gofu.png");
   cairo_destroy (cr);
   cairo_surface_destroy (surface);
-  gofu_destroy(gp);
+  gofu_destroy (gp);
   return 0;
 }

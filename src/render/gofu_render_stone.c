@@ -42,8 +42,10 @@ gofu_render_stone_black (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 void
 gofu_render_stone_black_plain (cairo_t * cr, gofu_t * gp)
 {
-  cairo_scale (cr, gp->param_size->stone.radius - gp->param_size->stone.thickness,
-	       gp->param_size->stone.radius - gp->param_size->stone.thickness);
+  cairo_scale (cr,
+	       gp->param_size->stone.radius - gp->param_size->stone.thickness,
+	       gp->param_size->stone.radius -
+	       gp->param_size->stone.thickness);
   gofu_render_set_color (cr, gp->param->stone.color_black_fill);
   gofu_render_stone_fill_and_stroke (cr, gp);
 }
@@ -51,9 +53,10 @@ gofu_render_stone_black_plain (cairo_t * cr, gofu_t * gp)
 void
 gofu_render_stone_black_radial (cairo_t * cr, gofu_t * gp)
 {
-  cairo_scale (cr, gp->param_size->stone.radius, gp->param_size->stone.radius);
+  cairo_scale (cr, gp->param_size->stone.radius,
+	       gp->param_size->stone.radius);
   /*TODO
-    cairo_set_source (cr, gp->param->stone.pattern_black_radial); */
+     cairo_set_source (cr, gp->param->stone.pattern_black_radial); */
   gofu_render_stone_fill (cr);
 }
 
@@ -82,8 +85,10 @@ gofu_render_stone_white (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 void
 gofu_render_stone_white_plain (cairo_t * cr, gofu_t * gp)
 {
-  cairo_scale (cr, gp->param_size->stone.radius - gp->param_size->stone.thickness,
-	       gp->param_size->stone.radius - gp->param_size->stone.thickness);
+  cairo_scale (cr,
+	       gp->param_size->stone.radius - gp->param_size->stone.thickness,
+	       gp->param_size->stone.radius -
+	       gp->param_size->stone.thickness);
   gofu_render_set_color (cr, gp->param->stone.color_white_fill);
   gofu_render_stone_fill_and_stroke (cr, gp);
 }
@@ -91,9 +96,10 @@ gofu_render_stone_white_plain (cairo_t * cr, gofu_t * gp)
 void
 gofu_render_stone_white_radial (cairo_t * cr, gofu_t * gp)
 {
-  cairo_scale (cr, gp->param_size->stone.radius, gp->param_size->stone.radius);
+  cairo_scale (cr, gp->param_size->stone.radius,
+	       gp->param_size->stone.radius);
   /*TODO
-    cairo_set_source (cr, stone.pattern_white_radial); */
+     cairo_set_source (cr, stone.pattern_white_radial); */
   gofu_render_stone_fill (cr);
 
 }
