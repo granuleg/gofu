@@ -1,81 +1,81 @@
 #include "gofu_render.h"
 
 void
-gofu_render_pangocairo (cairo_t * cr, gofu_t * gofup)
+gofu_render_pangocairo (cairo_t * cr, gofu_t * gp)
 {
   guint8 i, j;
-  gofu_render_grid_background (cr, gofup);
-  for (i = 1; i <= gofup->width; i++)
+  gofu_render_grid_background (cr, gp);
+  for (i = 1; i <= gp->popu->width; i++)
     {
-      for (j = 1; j <= gofup->length; j++)
+      for (j = 1; j <= gp->popu->length; j++)
 	{
-	  switch (gofup->local[i][j].grid)
+	  switch (gp->popu->elem[i][j].grid)
 	    {
 	    case GRID_NONE:
 	      break;
 	    case GRID_PLAIN:
-	      gofu_render_grid_liberty (cr, gofup, i, j);
+	      gofu_render_grid_liberty (cr, gp, i, j);
 	      break;
 	    case GRID_STARPOINT:
-	      gofu_render_grid_liberty (cr, gofup, i, j);
-	      gofu_render_grid_starpoint (cr, gofup, i, j);
+	      gofu_render_grid_liberty (cr, gp, i, j);
+	      gofu_render_grid_starpoint (cr, gp, i, j);
 	      break;
 	    default:
 	      g_printf ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
-	  switch (gofup->local[i][j].stone)
+	  switch (gp->popu->elem[i][j].stone)
 	    {
 	    case STONE_NONE:
 	      break;
 	    case STONE_BLACK:
-	      gofu_render_stone_black (cr, gofup, i, j);
+	      gofu_render_stone_black (cr, gp, i, j);
 	      break;
 	    case STONE_WHITE:
-	      gofu_render_stone_white (cr, gofup, i, j);
+	      gofu_render_stone_white (cr, gp, i, j);
 	      break;
 	    default:
 	      g_printf ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
-	  switch (gofup->local[i][j].marker)
+	  switch (gp->popu->elem[i][j].marker)
 	    {
 	    case MARKER_NONE:
 	      break;
 	    case MARKER_TRIANGLE:
-	      gofu_render_marker_triangle (cr, gofup, i, j);
+	      gofu_render_marker_triangle (cr, gp, i, j);
 	      break;
 	    case MARKER_DIAMOND:
-	      gofu_render_marker_diamond (cr, gofup, i, j);
+	      gofu_render_marker_diamond (cr, gp, i, j);
 	      break;
 	    case MARKER_CROSS:
-	      gofu_render_marker_cross (cr, gofup, i, j);
+	      gofu_render_marker_cross (cr, gp, i, j);
 	      break;
 	    case MARKER_PENTAGON_STAR:
-	      gofu_render_marker_pentagon_star (cr, gofup, i, j);
+	      gofu_render_marker_pentagon_star (cr, gp, i, j);
 	      break;
 	    case MARKER_CIRCLE:
-	      gofu_render_marker_circle (cr, gofup, i, j);
+	      gofu_render_marker_circle (cr, gp, i, j);
 	      break;
 	    case MARKER_SQUARE:
-	      gofu_render_marker_square (cr, gofup, i, j);
+	      gofu_render_marker_square (cr, gp, i, j);
 	      break;
 	    default:
 	      g_printf ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
-	  if ((g_strcmp0 ((gofup->local[i][j].label)->str, "") != 0)
-	      && (gofup->local[i][j].marker == MARKER_NONE))
-	    gofu_pangocairo_label (cr, gofup, i, j);
-	  switch (gofup->local[i][j].highlight)
+	  if ((g_strcmp0 ((gp->popu->elem[i][j].label)->str, "") != 0)
+	      && (gp->popu->elem[i][j].marker == MARKER_NONE))
+	    gofu_pangocairo_label (cr, gp, i, j);
+	  switch (gp->popu->elem[i][j].highlight)
 	    {
 	    case HIGHLIGHT_NONE:
 	      break;
 	    case HIGHLIGHT_HL1:
-	      gofu_render_color_hl1 (cr, gofup, i, j);
+	      gofu_render_color_hl1 (cr, gp, i, j);
 	      break;
 	    default:
 	      g_printf ("%d\n", __LINE__);
@@ -87,7 +87,7 @@ gofu_render_pangocairo (cairo_t * cr, gofu_t * gofup)
 }
 
 void
-gofu_render_senseilibrary (gofu_t * gofup)
+gofu_render_senseilibrary (gofu_t * gp)
 {
   /*$$ */
   /* X:plain black stone */
@@ -110,12 +110,12 @@ gofu_render_senseilibrary (gofu_t * gofup)
 
   guint8 i, j;
   gchar ascii;
-  for (j = 1; j <= gofup->length; j++)
+  for (j = 1; j <= gp->popu->length; j++)
     {
       g_printf ("$$ ");
-      for (i = 1; i <= gofup->width; i++)
+      for (i = 1; i <= gp->popu->width; i++)
 	{
-	  switch (gofup->popu[i][j].grid)
+	  switch (gp->popu->elem[i][j].grid)
 	    {
 	    case GRID_NONE:
 	      ascii = ' ';
@@ -130,7 +130,7 @@ gofu_render_senseilibrary (gofu_t * gofup)
 	      ascii = '?';
 	      break;
 	    }
-	  switch (gofup->popu[i][j].stone)
+	  switch (gp->popu->elem[i][j].stone)
 	    {
 	    case STONE_NONE:
 	      break;
@@ -144,30 +144,30 @@ gofu_render_senseilibrary (gofu_t * gofup)
 	      ascii = '?';
 	      break;
 	    }
-	  switch (gofup->popu[i][j].marker)
+	  switch (gp->popu->elem[i][j].marker)
 	    {
 	    case MARKER_NONE:
 	      break;
 	    case MARKER_CROSS:
-	      if (gofup->popu[i][j].stone == STONE_BLACK)
+	      if (gp->popu->elem[i][j].stone == STONE_BLACK)
 		ascii = 'Z';
-	      else if (gofup->popu[i][j].stone == STONE_WHITE)
+	      else if (gp->popu->elem[i][j].stone == STONE_WHITE)
 		ascii = 'P';
 	      else
 		ascii = 'M';
 	      break;
 	    case MARKER_TRIANGLE:
-	      if (gofup->popu[i][j].stone == STONE_BLACK)
+	      if (gp->popu->elem[i][j].stone == STONE_BLACK)
 		ascii = 'Y';
-	      else if (gofup->popu[i][j].stone == STONE_WHITE)
+	      else if (gp->popu->elem[i][j].stone == STONE_WHITE)
 		ascii = 'Q';
 	      else
 		ascii = 'T';
 	      break;
 	    case MARKER_DIAMOND:
-	      if (gofup->popu[i][j].stone == STONE_BLACK)
+	      if (gp->popu->elem[i][j].stone == STONE_BLACK)
 		ascii = 'B';
-	      else if (gofup->popu[i][j].stone == STONE_WHITE)
+	      else if (gp->popu->elem[i][j].stone == STONE_WHITE)
 		ascii = 'W';
 	      else
 		ascii = 'C';

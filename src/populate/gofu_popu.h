@@ -1,4 +1,5 @@
 #include <glib.h>
+/*why stdio and sdlib are here on a glib dependancy files*/
 #include <stdio.h>
 #include <stdlib.h>
 

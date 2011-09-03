@@ -1,4 +1,4 @@
-#define "gofu_render_util.h"
+#include "gofu_render_util.h"
 
 void
 cairo_uniform_stroke (cairo_t * cr)

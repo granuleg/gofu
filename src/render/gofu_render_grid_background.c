@@ -1,20 +1,20 @@
 #include "gofu_render_grid_background.h"
 
 void
-gofu_render_grid_background (cairo_t * cr, gofu_t * gofup)
+gofu_render_grid_background (cairo_t * cr, gofu_t * gp)
 {
-  switch (gofup->param.grid.background.style)
+  switch (gp->param->grid.background.style)
     {
     case 0:
       break;
     case 1:
-      gofu_render_grid_background_color (cr, gofup);
+      gofu_render_grid_background_color (cr, gp);
       break;
     case 2:
-      gofu_render_grid_background_image (cr, gofup);
+      gofu_render_grid_background_image (cr, gp);
       break;
     case 3:
-      gofu_render_grid_background_imagepattern (cr, gofup);
+      gofu_render_grid_background_imagepattern (cr, gp);
       break;
     default:
       g_printf ("%d\n", __LINE__);
@@ -24,34 +24,34 @@ gofu_render_grid_background (cairo_t * cr, gofu_t * gofup)
 }
 
 void
-gofu_render_grid_background_color (cairo_t * cr, gofu_t * gofup)
+gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp)
 {
   double max_x, max_y, min_x, min_y;
   cairo_save (cr);
-  min_x = gofu_popuwidth_to_user (gofup, 0);
-  min_y = gofu_populength_to_user (gofup, 0);
-  max_x = gofu_popuwidth_to_user (gofup, gofup->width + 1);
-  max_y = gofu_populength_to_user (gofup, gofup->length + 1);
-  gofu_render_set_color (cr, gofup->param.grid.background.color_fill);
+  min_x = gofu_popuwidth_to_user (gp, 0);
+  min_y = gofu_populength_to_user (gp, 0);
+  max_x = gofu_popuwidth_to_user (gp, gp->popu->width + 1);
+  max_y = gofu_populength_to_user (gp, gp->popu->length + 1);
+  gofu_render_set_color (cr, gp->param->grid.background.color);
   cairo_rectangle (cr, min_x, min_y, max_x, max_y);
   cairo_fill (cr);
   cairo_restore (cr);
 }
 
 void
-gofu_render_grid_background_image (cairo_t * cr, gofu_t * gofup)
+gofu_render_grid_background_image (cairo_t * cr, gofu_t * gp)
 {
   double max_x, max_y, min_x, min_y;
   double w, h;
   cairo_surface_t *image;
   cairo_save (cr);
-  min_x = gofu_popuwidth_to_user (gofup, 0);
-  min_y = gofu_populength_to_user (gofup, 0);
-  max_x = gofu_popuwidth_to_user (gofup, gofup->width + 1);
-  max_y = gofu_populength_to_user (gofup, gofup->length + 1);
+  min_x = gofu_popuwidth_to_user (gp, 0);
+  min_y = gofu_populength_to_user (gp, 0);
+  max_x = gofu_popuwidth_to_user (gp, gp->popu->width + 1);
+  max_y = gofu_populength_to_user (gp, gp->popu->length + 1);
   image =
     cairo_image_surface_create_from_png
-    ((gofup->param.grid.background.image)->str);
+    ((gp->param->grid.background.image)->str);
   w = cairo_image_surface_get_width (image);
   h = cairo_image_surface_get_height (image);
   cairo_scale (cr, max_x / w, max_y / h);
@@ -63,20 +63,20 @@ gofu_render_grid_background_image (cairo_t * cr, gofu_t * gofup)
 }
 
 void
-gofu_render_grid_background_imagepattern (cairo_t * cr, gofu_t * gofup)
+gofu_render_grid_background_imagepattern (cairo_t * cr, gofu_t * gp)
 {
   double max_x, max_y, min_x, min_y;
   cairo_surface_t *image;
   cairo_pattern_t *pattern;
   cairo_matrix_t matrix;
   cairo_save (cr);
-  min_x = gofu_popuwidth_to_user (gofup, 0);
-  min_y = gofu_populength_to_user (gofup, 0);
-  max_x = gofu_popuwidth_to_user (gofup, gofup->width + 1);
-  max_y = gofu_populength_to_user (gofup, gofup->length + 1);
+  min_x = gofu_popuwidth_to_user (gp, 0);
+  min_y = gofu_populength_to_user (gp, 0);
+  max_x = gofu_popuwidth_to_user (gp, gp->popu->width + 1);
+  max_y = gofu_populength_to_user (gp, gp->popu->length + 1);
   image =
     cairo_image_surface_create_from_png
-    ((gofup->param.grid.background.image)->str);
+    ((gp->param->grid.background.image)->str);
   pattern = cairo_pattern_create_for_surface (image);
   cairo_translate (cr, min_x, min_y);
   cairo_pattern_set_extend (pattern, CAIRO_EXTEND_REFLECT);

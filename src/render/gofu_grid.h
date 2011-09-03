@@ -1,3 +1,5 @@
+#include "gofu_render.h"
+
 guint8 gofu_grid_emptyneighbour (gofu_t *, guint8, guint8);
 gboolean gofu_grid_liberty_bound_east (guint8);
 gboolean gofu_grid_liberty_bound_south (guint8);

@@ -69,6 +69,9 @@ typedef struct _gofu_param_size
   gofu_param_size_marker_t marker;
 } gofu_param_size_t;
 
+
+gofu_param_size_t * gofu_param_size_alloc (void);
+void gofu_param_size_free (gofu_param_size_t * gp);
 void gofu_param_size_init (gofu_param_size_t *, guint8, guint8);
 gdouble box_in_box (gdouble, gdouble, gdouble, gdouble);
 void gofu_param_size_dimension (gofu_param_size_t *, guint8, guint8,

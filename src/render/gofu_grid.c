@@ -10,18 +10,18 @@
 #define compass_NE 1 << 7
 
 guint8
-gofu_grid_emptyneighbour (gofu_t * gofup, guint8 i, guint8 j)
+gofu_grid_emptyneighbour (gofu_t * gp, guint8 i, guint8 j)
 {
   guint8 gridN, gridS, gridW, gridE, gridNW, gridNE, gridSW, gridSE;
   guint8 neighbour = 0;
-  gridN = gofup->popu[i][j - 1].grid;
-  gridS = gofup->popu[i][j + 1].grid;
-  gridW = gofup->popu[i - 1][j].grid;
-  gridE = gofup->popu[i + 1][j].grid;
-  gridNW = gofup->popu[i - 1][j - 1].grid;
-  gridNE = gofup->popu[i + 1][j - 1].grid;
-  gridSW = gofup->popu[i - 1][j + 1].grid;
-  gridSE = gofup->popu[i + 1][j + 1].grid;
+  gridN = gp->popu->elem[i][j - 1].grid;
+  gridS = gp->popu->elem[i][j + 1].grid;
+  gridW = gp->popu->elem[i - 1][j].grid;
+  gridE = gp->popu->elem[i + 1][j].grid;
+  gridNW = gp->popu->elem[i - 1][j - 1].grid;
+  gridNE = gp->popu->elem[i + 1][j - 1].grid;
+  gridSW = gp->popu->elem[i - 1][j + 1].grid;
+  gridSE = gp->popu->elem[i + 1][j + 1].grid;
   if (gridN == GRID_NONE)
     neighbour |= compass__N;
   if (gridS == GRID_NONE)
@@ -122,29 +122,27 @@ gofu_grid_starpoint_detect_NE (guint8 neighbour)
 }
 
 gdouble
-gofu_popuwidth_to_user (gofu_t * gofup, guint8 i)
+gofu_popuwidth_to_user (gofu_t * gp, guint8 i)
 {
-  assert (i <= gofup->width + 1);
   if (i == 0)
     return 0;
-  else if (i == gofup->width + 1)
-    return ((2 * gofup->param.grid.liberty.margin_width) +
-	    ((gofup->width - 1) * gofup->param.grid.liberty.spacing_width));
+  else if (i == gp->popu->width + 1)
+    return ((2 * gp->param_size->grid.liberty.margin_width) +
+	    ((gp->popu->width - 1) * gp->param_size->grid.liberty.spacing_width));
   else
-    return (gofup->param.grid.liberty.margin_width +
-	    ((i - 1) * gofup->param.grid.liberty.spacing_width));
+    return (gp->param_size->grid.liberty.margin_width +
+	    ((i - 1) * gp->param_size->grid.liberty.spacing_width));
 }
 
 gdouble
-gofu_populength_to_user (gofu_t * gofup, guint8 j)
+gofu_populength_to_user (gofu_t * gp, guint8 j)
 {
-  assert (j <= gofup->length + 1);
   if (j == 0)
     return 0;
-  else if (j == gofup->length + 1)
-    return ((2 * gofup->param.grid.liberty.margin_length) +
-	    ((gofup->length - 1) * gofup->param.grid.liberty.spacing_length));
+  else if (j == gp->popu->length + 1)
+    return ((2 * gp->param_size->grid.liberty.margin_length) +
+	    ((gp->popu->length - 1) * gp->param_size->grid.liberty.spacing_length));
   else
-    return (gofup->param.grid.liberty.margin_length +
-	    ((j - 1) * gofup->param.grid.liberty.spacing_length));
+    return (gp->param_size->grid.liberty.margin_length +
+	    ((j - 1) * gp->param_size->grid.liberty.spacing_length));
 }

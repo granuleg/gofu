@@ -8,6 +8,22 @@ gofu_param_size_ratio_size_t ratio_size =
   { G_SQRT2_2, G_SQRT2_2, 1. / 2, 1. / 4 };
 gofu_param_size_ratio_thickness_t ratio_thickness = { 1, 1, 1, 1 };
 
+
+gofu_param_size_t *
+gofu_param_size_alloc (void)
+{
+  gofu_param_size_t *gp;
+  if ((gp = (gofu_param_size_t *) g_malloc (sizeof (gofu_param_size_t))) == NULL)
+    return NULL;
+  return gp;
+}
+
+void
+gofu_param_size_free (gofu_param_size_t * gp)
+{
+  g_free ((gpointer) gp);
+}
+
 void
 gofu_param_size_init (gofu_param_size_t * gp, guint8 width, guint8 length)
 {

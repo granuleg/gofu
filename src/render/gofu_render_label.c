@@ -1,7 +1,7 @@
-#define "gofu_render_label.c"
+#include "gofu_render_label.h"
 
 void
-gofu_render_label (cairo_t * cr, gofu_t * gofup, guint8 i, guint8 j)
+gofu_render_label (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
   PangoLayout *layout;
   PangoFontDescription *font_description;
@@ -21,7 +21,7 @@ gofu_render_label (cairo_t * cr, gofu_t * gofup, guint8 i, guint8 j)
   pango_font_description_set_absolute_size (font_description,
 					    100 * PANGO_SCALE);
   pango_layout_set_font_description (layout, font_description);
-  pango_layout_set_text (layout, (gofup->local[i][j].label)->str, -1);
+  pango_layout_set_text (layout, (gp->popu->elem[i][j].label)->str, -1);
   pango_layout_get_extents (layout, &ink_rect, &logical_rect);
   size_x = ink_rect.width;
   size_y = ink_rect.height;
@@ -30,21 +30,21 @@ gofu_render_label (cairo_t * cr, gofu_t * gofup, guint8 i, guint8 j)
   pyta =
     sqrt (pow (0.5 * size_x / PANGO_SCALE, 2) +
 	  pow (0.5 * size_y / PANGO_SCALE, 2));
-  cairo_translate (cr, gofu_localwidth_to_user (gofup, i),
-		   gofu_locallength_to_user (gofup, j));
+  cairo_translate (cr, gofu_localwidth_to_user (gp, i),
+		   gofu_locallength_to_user (gp, j));
   cairo_scale (cr,
-	       gofup->param.marker.radius / pyta,
-	       gofup->param.marker.radius / pyta);
-  switch (gofup->local[i][j].stone)
+	       gp->param_size->marker.radius / pyta,
+	       gp->param_size->marker.radius / pyta);
+  switch (gp->popu->elem[i][j].stone)
     {
     case STONE_BLACK:
-      gofu_cairo_set_color (cr, gofup->param.label.color_black_stroke);
+      gofu_cairo_set_color (cr, gp->param->label.color_black_stroke);
       break;
     case STONE_WHITE:
-      gofu_cairo_set_color (cr, gofup->param.label.color_white_stroke);
+      gofu_cairo_set_color (cr, gp->param->label.color_white_stroke);
       break;
     case STONE_NONE:
-      gofu_cairo_set_color (cr, gofup->param.label.color_none_stroke);
+      gofu_cairo_set_color (cr, gp->param->label.color_none_stroke);
       break;
     default:
       g_printf ("%d\n", __LINE__);
