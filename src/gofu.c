@@ -12,7 +12,7 @@ gofu_create (guint8 width, guint8 length)
   gp->param_size = gofu_param_size_alloc ();
   gofu_popu_init (gp->popu);
   gofu_param_init (gp->param);
-  gofu_param_size_init (&gp->param_size, width, length);
+  gofu_param_size_init (gp->param_size, width, length);
   return gp;
 }
 
@@ -35,10 +35,10 @@ main (void)
   gp->param_size->surface_width = 210 * (72 / 25.4);
   gp->param_size->surface_length = 297 * (72 / 25.4);
   surface =
-    cairo_pdf_surface_create ("goban.pdf", gp->param_size->surface_width,
+    cairo_pdf_surface_create ("gofu.pdf", gp->param_size->surface_width,
 			      gp->param_size->surface_length);
   cr = cairo_create (surface);
-  gofu_render (cr, gp);
+  gofu_render_pangocairo (cr, gp);
   cairo_surface_write_to_png (surface, "gofu.png");
   cairo_destroy (cr);
   cairo_surface_destroy (surface);

@@ -21,8 +21,8 @@ void
 gofu_render_stone_black (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
   cairo_save (cr);
-  cairo_translate (cr, gofu_localwidth_to_user (gp, i),
-		   gofu_locallength_to_user (gp, j));
+  cairo_translate (cr, gofu_popuwidth_to_user (gp, i),
+		   gofu_populength_to_user (gp, j));
   switch (gp->param->stone.style)
     {
     case 0:
@@ -64,8 +64,8 @@ void
 gofu_render_stone_white (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
   cairo_save (cr);
-  cairo_translate (cr, gofu_localwidth_to_user (gp, i),
-		   gofu_locallength_to_user (gp, j));
+  cairo_translate (cr, gofu_popuwidth_to_user (gp, i),
+		   gofu_populength_to_user (gp, j));
   switch (gp->param->stone.style)
     {
     case 0:

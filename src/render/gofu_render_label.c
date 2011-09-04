@@ -30,21 +30,21 @@ gofu_render_label (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   pyta =
     sqrt (pow (0.5 * size_x / PANGO_SCALE, 2) +
 	  pow (0.5 * size_y / PANGO_SCALE, 2));
-  cairo_translate (cr, gofu_localwidth_to_user (gp, i),
-		   gofu_locallength_to_user (gp, j));
+  cairo_translate (cr, gofu_popuwidth_to_user (gp, i),
+		   gofu_populength_to_user (gp, j));
   cairo_scale (cr,
 	       gp->param_size->marker.radius / pyta,
 	       gp->param_size->marker.radius / pyta);
   switch (gp->popu->elem[i][j].stone)
     {
     case STONE_BLACK:
-      gofu_cairo_set_color (cr, gp->param->label.color_black_stroke);
+      gofu_render_set_color (cr, gp->param->label.color_black_stroke);
       break;
     case STONE_WHITE:
-      gofu_cairo_set_color (cr, gp->param->label.color_white_stroke);
+      gofu_render_set_color (cr, gp->param->label.color_white_stroke);
       break;
     case STONE_NONE:
-      gofu_cairo_set_color (cr, gp->param->label.color_none_stroke);
+      gofu_render_set_color (cr, gp->param->label.color_none_stroke);
       break;
     default:
       g_printf ("%d\n", __LINE__);

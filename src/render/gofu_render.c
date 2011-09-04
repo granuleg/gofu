@@ -69,7 +69,7 @@ gofu_render_pangocairo (cairo_t * cr, gofu_t * gp)
 	    }
 	  if ((g_strcmp0 ((gp->popu->elem[i][j].label)->str, "") != 0)
 	      && (gp->popu->elem[i][j].marker == MARKER_NONE))
-	    gofu_pangocairo_label (cr, gp, i, j);
+	    gofu_render_label (cr, gp, i, j);
 	  switch (gp->popu->elem[i][j].highlight)
 	    {
 	    case HIGHLIGHT_NONE:

@@ -9,8 +9,8 @@
 void
 gofu_render_marker_context (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
-  cairo_translate (cr, gofu_localwidth_to_user (gp, i),
-		   gofu_locallength_to_user (gp, j));
+  cairo_translate (cr, gofu_popuwidth_to_user (gp, i),
+		   gofu_populength_to_user (gp, j));
   cairo_scale (cr, gp->param_size->marker.radius,
 	       gp->param_size->marker.radius);
 }
