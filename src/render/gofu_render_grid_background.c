@@ -17,7 +17,7 @@ gofu_render_grid_background (cairo_t * cr, gofu_t * gp)
       gofu_render_grid_background_imagepattern (cr, gp);
       break;
     default:
-      g_printf ("%d\n", __LINE__);
+      g_print ("%d\n", __LINE__);
       exit (EXIT_FAILURE);
       break;
     }
@@ -28,10 +28,10 @@ gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp)
 {
   double max_x, max_y, min_x, min_y;
   cairo_save (cr);
-  min_x = gofu_popuwidth_to_user (gp, 0);
-  min_y = gofu_populength_to_user (gp, 0);
-  max_x = gofu_popuwidth_to_user (gp, gp->popu->width + 1);
-  max_y = gofu_populength_to_user (gp, gp->popu->length + 1);
+  min_x = gofu_move_width (gp, 0);
+  min_y = gofu_move_length (gp, 0);
+  max_x = gofu_move_width (gp, gp->popu->width + 1);
+  max_y = gofu_move_length (gp, gp->popu->length + 1);
   gofu_render_set_color (cr, gp->param->grid.background.color);
   cairo_rectangle (cr, min_x, min_y, max_x, max_y);
   cairo_fill (cr);
@@ -45,10 +45,10 @@ gofu_render_grid_background_image (cairo_t * cr, gofu_t * gp)
   double w, h;
   cairo_surface_t *image;
   cairo_save (cr);
-  min_x = gofu_popuwidth_to_user (gp, 0);
-  min_y = gofu_populength_to_user (gp, 0);
-  max_x = gofu_popuwidth_to_user (gp, gp->popu->width + 1);
-  max_y = gofu_populength_to_user (gp, gp->popu->length + 1);
+  min_x = gofu_move_width (gp, 0);
+  min_y = gofu_move_length (gp, 0);
+  max_x = gofu_move_width (gp, gp->popu->width + 1);
+  max_y = gofu_move_length (gp, gp->popu->length + 1);
   image =
     cairo_image_surface_create_from_png
     ((gp->param->grid.background.image)->str);
@@ -70,10 +70,10 @@ gofu_render_grid_background_imagepattern (cairo_t * cr, gofu_t * gp)
   cairo_pattern_t *pattern;
   cairo_matrix_t matrix;
   cairo_save (cr);
-  min_x = gofu_popuwidth_to_user (gp, 0);
-  min_y = gofu_populength_to_user (gp, 0);
-  max_x = gofu_popuwidth_to_user (gp, gp->popu->width + 1);
-  max_y = gofu_populength_to_user (gp, gp->popu->length + 1);
+  min_x = gofu_move_width (gp, 0);
+  min_y = gofu_move_length (gp, 0);
+  max_x = gofu_move_width (gp, gp->popu->width + 1);
+  max_y = gofu_move_length (gp, gp->popu->length + 1);
   image =
     cairo_image_surface_create_from_png
     ((gp->param->grid.background.image)->str);

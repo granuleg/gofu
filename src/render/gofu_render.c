@@ -1,4 +1,5 @@
 #include "gofu_render.h"
+#include "gofu_render_external.h"
 
 void
 gofu_render_pangocairo (cairo_t * cr, gofu_t * gp)
@@ -21,7 +22,7 @@ gofu_render_pangocairo (cairo_t * cr, gofu_t * gp)
 	      gofu_render_grid_starpoint (cr, gp, i, j);
 	      break;
 	    default:
-	      g_printf ("%d\n", __LINE__);
+	      g_print ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
@@ -36,7 +37,7 @@ gofu_render_pangocairo (cairo_t * cr, gofu_t * gp)
 	      gofu_render_stone_white (cr, gp, i, j);
 	      break;
 	    default:
-	      g_printf ("%d\n", __LINE__);
+	      g_print ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
@@ -63,7 +64,7 @@ gofu_render_pangocairo (cairo_t * cr, gofu_t * gp)
 	      gofu_render_marker_square (cr, gp, i, j);
 	      break;
 	    default:
-	      g_printf ("%d\n", __LINE__);
+	      g_print ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
@@ -78,7 +79,7 @@ gofu_render_pangocairo (cairo_t * cr, gofu_t * gp)
 	      gofu_render_color_hl1 (cr, gp, i, j);
 	      break;
 	    default:
-	      g_printf ("%d\n", __LINE__);
+	      g_print ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
@@ -112,7 +113,7 @@ gofu_render_senseilibrary (gofu_t * gp)
   gchar ascii;
   for (j = 1; j <= gp->popu->length; j++)
     {
-      g_printf ("$$ ");
+      g_print ("$$ ");
       for (i = 1; i <= gp->popu->width; i++)
 	{
 	  switch (gp->popu->elem[i][j].grid)
@@ -176,8 +177,8 @@ gofu_render_senseilibrary (gofu_t * gp)
 	      ascii = '?';
 	      break;
 	    }
-	  g_printf ("%c ", ascii);
+	  g_print ("%c ", ascii);
 	}
-      g_printf ("\n");
+      g_print ("\n");
     }
 }

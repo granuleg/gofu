@@ -1,4 +1,6 @@
 #include "gofu_render.h"
+#include "gofu_move.h"
+#include "gofu_render_util.h"
 
 void gofu_render_grid_background (cairo_t *, gofu_t *);
 void gofu_render_grid_background_color (cairo_t *, gofu_t *);

@@ -7,8 +7,7 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   guint8 stone, stoneE, stoneS, stoneW, stoneN;
   guint8 detect, detectE, detectS, detectW, detectN;
   cairo_save (cr);
-  cairo_translate (cr, gofu_popuwidth_to_user (gp, i),
-		   gofu_populength_to_user (gp, j));
+  cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
   cairo_scale (cr, gp->param_size->grid.liberty.spacing_width / 2.0,
 	       gp->param_size->grid.liberty.spacing_length / 2.0);
   cairo_set_line_join (cr, CAIRO_LINE_JOIN_MITER);
@@ -86,7 +85,7 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 	  cairo_restore (cr);
 	  break;
 	default:
-	  g_printf ("%d\n", __LINE__);
+	  g_print ("%d\n", __LINE__);
 	  exit (EXIT_FAILURE);
 	  break;
 	}
@@ -161,7 +160,7 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 	  cairo_restore (cr);
 	  break;
 	default:
-	  g_printf ("%d\n", __LINE__);
+	  g_print ("%d\n", __LINE__);
 	  exit (EXIT_FAILURE);
 	  break;
 	}
@@ -178,7 +177,7 @@ gofu_render_grid_liberty_E (cairo_t * cr, gofu_t * gp)
       gofu_render_grid_line_E (cr);
       break;
     default:
-      g_printf ("%d\n", __LINE__);
+      g_print ("%d\n", __LINE__);
       exit (EXIT_FAILURE);
       break;
     }

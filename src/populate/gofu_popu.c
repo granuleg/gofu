@@ -240,7 +240,7 @@ gofu_popu_init_grid_random (gofu_popu_t * gp)
 	    case 3:
 	      break;
 	    default:
-	      g_printf ("%d\n", __LINE__);
+	      g_print ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
@@ -269,7 +269,7 @@ gofu_popu_init_stone_random (gofu_popu_t * gp)
 	      gp->elem[i][j].stone = STONE_BLACK;
 	      break;
 	    default:
-	      g_printf ("%d\n", __LINE__);
+	      g_print ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
@@ -310,7 +310,7 @@ gofu_popu_init_marker_random (gofu_popu_t * gp)
 	      gp->elem[i][j].marker = MARKER_SQUARE;
 	      break;
 	    default:
-	      g_printf ("%d\n", __LINE__);
+	      g_print ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }
@@ -353,7 +353,7 @@ gofu_popu_init_highlight_random (gofu_popu_t * gp)
 	      gp->elem[i][j].highlight = HIGHLIGHT_HL1;
 	      break;
 	    default:
-	      g_printf ("%d\n", __LINE__);
+	      g_print ("%d\n", __LINE__);
 	      exit (EXIT_FAILURE);
 	      break;
 	    }

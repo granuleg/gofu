@@ -30,8 +30,7 @@ gofu_render_label (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   pyta =
     sqrt (pow (0.5 * size_x / PANGO_SCALE, 2) +
 	  pow (0.5 * size_y / PANGO_SCALE, 2));
-  cairo_translate (cr, gofu_popuwidth_to_user (gp, i),
-		   gofu_populength_to_user (gp, j));
+  cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
   cairo_scale (cr,
 	       gp->param_size->marker.radius / pyta,
 	       gp->param_size->marker.radius / pyta);
@@ -47,7 +46,7 @@ gofu_render_label (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_set_color (cr, gp->param->label.color_none_stroke);
       break;
     default:
-      g_printf ("%d\n", __LINE__);
+      g_print ("%d\n", __LINE__);
       exit (EXIT_FAILURE);
       break;
     }

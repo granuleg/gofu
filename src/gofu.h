@@ -3,4 +3,4 @@
 #include <cairo/cairo-svg.h>
 #include <cairo/cairo-ps.h>
 
-#include "render/gofu_render.h"
+#include "./render/gofu_render.h"

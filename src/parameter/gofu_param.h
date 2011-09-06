@@ -1,5 +1,8 @@
 #include <glib.h>
 
+#ifndef GOFU_PARAM_T
+#define GOFU_PARAM_T
+
 typedef struct _gofu_color_rgba
 {
   gdouble red;
@@ -78,6 +81,8 @@ typedef struct _gofu_param
   gofu_param_highlight_t highlight;
   gofu_param_label_t label;
 } gofu_param_t;
+
+#endif // GOFU_PARAM_T
 
 gofu_param_t *gofu_param_alloc ();
 void gofu_param_free (gofu_param_t *);

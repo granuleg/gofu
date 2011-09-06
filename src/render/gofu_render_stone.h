@@ -1,6 +1,8 @@
 #include <math.h>
 
 #include "gofu_render.h"
+#include "gofu_move.h"
+#include "gofu_render_util.h"
 
 void gofu_render_stone_fill (cairo_t *);
 void gofu_render_stone_fill_and_stroke (cairo_t *, gofu_t *);

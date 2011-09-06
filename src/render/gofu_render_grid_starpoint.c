@@ -5,8 +5,7 @@ gofu_render_grid_starpoint (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
   guint8 detect;
   cairo_save (cr);
-  cairo_translate (cr, gofu_popuwidth_to_user (gp, i),
-		   gofu_populength_to_user (gp, j));
+  cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
   cairo_scale (cr, gp->param_size->grid.starpoint.radius,
 	       gp->param_size->grid.starpoint.radius);
   gofu_render_set_color (cr, gp->param->grid.starpoint.color);
@@ -44,7 +43,7 @@ gofu_render_grid_starpoint_SE (cairo_t * cr, gofu_t * gp)
       gofu_render_grid_starpoint_SE_square (cr);
       break;
     default:
-      g_printf ("%d\n", __LINE__);
+      g_print ("%d\n", __LINE__);
       exit (EXIT_FAILURE);
       break;
     }

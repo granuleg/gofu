@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef GOFU_POPU_T
+#define GOFU_POPU_T
+
 typedef enum _gofu_popu_enum
 {
   GRID_NONE,
@@ -37,6 +40,8 @@ typedef struct _gofu_popu
   guint8 length;
   gofu_popu_elem_t **elem;
 } gofu_popu_t;
+
+#endif // GOFU_POPU_T
 
 gofu_popu_t *gofu_popu_alloc (guint8, guint8);
 gpointer *gofu_popu_alloc_elem (gsize, guint8, guint8);

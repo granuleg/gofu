@@ -9,8 +9,7 @@
 void
 gofu_render_marker_context (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
-  cairo_translate (cr, gofu_popuwidth_to_user (gp, i),
-		   gofu_populength_to_user (gp, j));
+  cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
   cairo_scale (cr, gp->param_size->marker.radius,
 	       gp->param_size->marker.radius);
 }
@@ -40,7 +39,7 @@ gofu_render_marker_stroke (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       cairo_uniform_stroke (cr);
       break;
     default:
-      g_printf ("%d\n", __LINE__);
+      g_print ("%d\n", __LINE__);
       exit (EXIT_FAILURE);
       break;
     }

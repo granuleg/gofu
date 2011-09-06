@@ -1,6 +1,8 @@
 #include <math.h>
 
 #include "gofu_render.h"
+#include "gofu_move.h"
+#include "gofu_render_util.h"
 
 void gofu_render_marker_context (cairo_t *, gofu_t *, guint8, guint8);
 void gofu_render_marker_stroke (cairo_t *, gofu_t *, guint8, guint8);

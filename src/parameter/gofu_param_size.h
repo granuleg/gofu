@@ -1,5 +1,8 @@
 #include <glib.h>
 
+#ifndef GOFU_PARAM_SIZE_T
+#define GOFU_PARAM_SIZE_T
+
 typedef struct _gofu_param_size_description
 {
   guint8 number_line_width;
@@ -69,6 +72,7 @@ typedef struct _gofu_param_size
   gofu_param_size_marker_t marker;
 } gofu_param_size_t;
 
+#endif // GOFU_PARAM_SIZE_T
 
 gofu_param_size_t *gofu_param_size_alloc (void);
 void gofu_param_size_free (gofu_param_size_t * gp);
