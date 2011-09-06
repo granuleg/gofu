@@ -51,6 +51,7 @@ void gofu_popu_free_string (gofu_popu_t *);
 void gofu_popu_free_elem (gpointer *, guint8);
 
 void gofu_popu_init (gofu_popu_t *);
+void gofu_popu_init_random (gofu_popu_t *);
 void gofu_popu_init_grid (gofu_popu_t *);
 void gofu_popu_init_grid_liberty (gofu_popu_t *);
 void gofu_popu_init_grid_starpoint (gofu_popu_t *);

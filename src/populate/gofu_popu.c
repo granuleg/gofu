@@ -72,14 +72,20 @@ void
 gofu_popu_init (gofu_popu_t * gp)
 {
   gofu_popu_init_grid (gp);
-  //gofu_popu_init_grid_random (gp);
-  gofu_popu_init_stone_random (gp);
+  gofu_popu_init_stone (gp);
   gofu_popu_init_marker (gp);
-  //gofu_popu_init_marker_random (gp);
   gofu_popu_init_label (gp);
-  //gofu_popu_init_label_random (gp);
   gofu_popu_init_highlight (gp);
-  //gofu_popu_init_highlight_random (gp);
+}
+
+void
+gofu_popu_init_random (gofu_popu_t * gp)
+{
+  gofu_popu_init_grid_random (gp);
+  gofu_popu_init_stone_random (gp);
+  gofu_popu_init_marker_random (gp);
+  gofu_popu_init_label_random (gp);
+  gofu_popu_init_highlight_random (gp);
 }
 
 void
