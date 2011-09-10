@@ -1,11 +1,13 @@
 #include "gofu_param_size.h"
 
 #define G_SQRT2_2 (G_SQRT2/2)
+#define G_SQRT5 2.236067977
+#define MAX_MARKER_RADIUS (3.0-G_SQRT5)/2.0
 
 gofu_param_size_description_t jp_standard = { 19, 19, 140, 150, 7.26, 7.82 };
 gofu_param_size_description_t square = { 1, 1, 23, 23, 23, 23 };
 gofu_param_size_ratio_size_t ratio_size =
-  { G_SQRT2_2, G_SQRT2_2, 1. / 2, 1. / 4 };
+  { G_SQRT2_2, MAX_MARKER_RADIUS / 2., 1. / 2, 1. / 2 };
 gofu_param_size_ratio_thickness_t ratio_thickness = { 1, 1, 1, 1 };
 
 

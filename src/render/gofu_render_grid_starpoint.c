@@ -36,10 +36,12 @@ gofu_render_grid_starpoint_SE (cairo_t * cr, gofu_t * gp)
 {
   switch (gp->param->grid.starpoint.style)
     {
-    case 0:
+    case GRID_STARPOINT_NO:
+      break;
+    case GRID_STARPOINT_ROUND:
       gofu_render_grid_starpoint_SE_round (cr);
       break;
-    case 1:
+    case GRID_STARPOINT_SQUARE:
       gofu_render_grid_starpoint_SE_square (cr);
       break;
     default:

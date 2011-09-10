@@ -54,7 +54,7 @@ gofu_render_label (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   cairo_move_to (cr, (-0.5 * size_x + delta_x) / PANGO_SCALE,
 		 (-0.5 * size_y + delta_y) / PANGO_SCALE);
   pango_cairo_show_layout (cr, layout);
-  cairo_stroke (cr);		/*clear move ??? */
+  cairo_new_path (cr);
   g_object_unref (layout);
   pango_font_description_free (font_description);
   cairo_restore (cr);

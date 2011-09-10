@@ -19,11 +19,10 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   gridW = gp->popu->elem[i - 1][j].grid;
   gridN = gp->popu->elem[i][j - 1].grid;
   cairo_move_to (cr, 0., 0.);
-  if (stone == STONE_NONE || gp->param->grid.style_lighten == 0)
+  if (stone == STONE_NONE || gp->param->grid.style_lighten == FALSE)
     {
-      switch (gp->param->grid.style_boundary)
+      if (gp->param->grid.style_boundary == FALSE)
 	{
-	case 0:
 	  cairo_set_line_width (cr, gp->param_size->grid.liberty.thickness);
 	  if (gridE != GRID_NONE)
 	    gofu_render_grid_liberty_E (cr, gp);
@@ -41,8 +40,9 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 	  cairo_save (cr);
 	  cairo_uniform_stroke (cr);
 	  cairo_restore (cr);
-	  break;
-	case 1:
+	}
+      else
+	{
 	  detect = gofu_grid_emptyneighbour (gp, i, j);
 	  detectE = gofu_grid_liberty_bound_east (detect);
 	  detectS = gofu_grid_liberty_bound_south (detect);
@@ -83,22 +83,16 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 	  cairo_save (cr);
 	  cairo_uniform_stroke (cr);
 	  cairo_restore (cr);
-	  break;
-	default:
-	  g_print ("%d\n", __LINE__);
-	  exit (EXIT_FAILURE);
-	  break;
 	}
     }
-  else				/*else if (stone != STONE_NONE && gp->param->grid.style_lighten == 1) */
+  else				/*else if (stone != STONE_NONE && gp->param->grid.style_lighten == TRUE) */
     {
       stoneE = gp->popu->elem[i + 1][j].stone;
       stoneS = gp->popu->elem[i][j + 1].stone;
       stoneW = gp->popu->elem[i - 1][j].stone;
       stoneN = gp->popu->elem[i][j - 1].stone;
-      switch (gp->param->grid.style_boundary)
+      if (gp->param->grid.style_boundary == FALSE)
 	{
-	case 0:
 	  cairo_set_line_width (cr, gp->param_size->grid.liberty.thickness);
 	  if (gridE != GRID_NONE && stoneE == STONE_NONE)
 	    gofu_render_grid_liberty_E (cr, gp);
@@ -116,8 +110,9 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 	  cairo_save (cr);
 	  cairo_uniform_stroke (cr);
 	  cairo_restore (cr);
-	  break;
-	case 1:
+	}
+      else
+	{
 	  detect = gofu_grid_emptyneighbour (gp, i, j);
 	  detectE = gofu_grid_liberty_bound_east (detect);
 	  detectS = gofu_grid_liberty_bound_south (detect);
@@ -158,11 +153,6 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 	  cairo_save (cr);
 	  cairo_uniform_stroke (cr);
 	  cairo_restore (cr);
-	  break;
-	default:
-	  g_print ("%d\n", __LINE__);
-	  exit (EXIT_FAILURE);
-	  break;
 	}
     }
   cairo_restore (cr);
@@ -173,7 +163,9 @@ gofu_render_grid_liberty_E (cairo_t * cr, gofu_t * gp)
 {
   switch (gp->param->grid.liberty.style)
     {
-    case 0:
+    case GRID_LIBERTY_NO:
+      break;
+    case GRID_LIBERTY_LINE:
       gofu_render_grid_line_E (cr);
       break;
     default:

@@ -24,10 +24,12 @@ gofu_render_stone_black (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
   switch (gp->param->stone.style)
     {
-    case 0:
+    case STONE_NO:
+      break;
+    case STONE_PLAIN:
       gofu_render_stone_black_plain (cr, gp);
       break;
-    case 1:
+    case STONE_RADIAL:
       gofu_render_stone_black_radial (cr, gp);
       break;
     default:
@@ -66,10 +68,12 @@ gofu_render_stone_white (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
   switch (gp->param->stone.style)
     {
-    case 0:
+    case STONE_NO:
+      break;
+    case STONE_PLAIN:
       gofu_render_stone_white_plain (cr, gp);
       break;
-    case 1:
+    case STONE_RADIAL:
       gofu_render_stone_white_radial (cr, gp);
       break;
     default:

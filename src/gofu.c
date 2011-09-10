@@ -10,8 +10,8 @@ gofu_create (guint8 width, guint8 length)
   gp->popu = gofu_popu_alloc (width, length);
   gp->param = gofu_param_alloc ();
   gp->param_size = gofu_param_size_alloc ();
-  //gofu_popu_init (gp->popu);
-  gofu_popu_init_random (gp->popu);
+  gofu_popu_init (gp->popu);
+  //gofu_popu_init_random (gp->popu);
   gofu_param_init (gp->param);
   gp->param_size->surface_width = 210 * (72 / 25.4);
   gp->param_size->surface_length = 297 * (72 / 25.4);

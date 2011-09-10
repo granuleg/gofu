@@ -37,8 +37,8 @@ gofu_param_init (gofu_param_t * gp)
 void
 gofu_param_init_grid (gofu_param_t * gp)
 {
-  gp->grid.style_boundary = 0;
-  gp->grid.style_lighten = 0;
+  gp->grid.style_boundary = FALSE;
+  gp->grid.style_lighten = FALSE;
   gofu_param_init_grid_background (gp);
   gofu_param_init_grid_liberty (gp);
   gofu_param_init_grid_starpoint (gp);
@@ -47,7 +47,7 @@ gofu_param_init_grid (gofu_param_t * gp)
 void
 gofu_param_init_grid_background (gofu_param_t * gp)
 {
-  gp->grid.background.style = 0;
+  gp->grid.background.style = GRID_BACKGROUND_COLOR;
   gofu_param_set_color (&gp->grid.background.color, 222, 176, 109, 255);
   gp->grid.background.image = g_string_new ("background.png");
 }
@@ -55,21 +55,21 @@ gofu_param_init_grid_background (gofu_param_t * gp)
 void
 gofu_param_init_grid_liberty (gofu_param_t * gp)
 {
-  gp->grid.liberty.style = 0;
+  gp->grid.liberty.style = GRID_LIBERTY_LINE;
   gofu_param_set_color (&gp->grid.liberty.color, 0, 0, 0, 255);
 }
 
 void
 gofu_param_init_grid_starpoint (gofu_param_t * gp)
 {
-  gp->grid.starpoint.style = 0;
+  gp->grid.starpoint.style = GRID_STARPOINT_ROUND;
   gofu_param_set_color (&gp->grid.starpoint.color, 0, 0, 0, 255);
 }
 
 void
 gofu_param_init_stone (gofu_param_t * gp)
 {
-  gp->stone.style = 0;
+  gp->stone.style = STONE_PLAIN;
   gofu_param_set_color (&gp->stone.color_black_stroke, 0, 0, 0, 255);
   gofu_param_set_color (&gp->stone.color_black_fill, 0, 0, 0, 255);
   gofu_param_set_color (&gp->stone.color_white_stroke, 0, 0, 0, 255);
@@ -83,7 +83,6 @@ gofu_param_init_stone (gofu_param_t * gp)
 void
 gofu_param_init_marker (gofu_param_t * gp)
 {
-  gp->marker.style = 0;
   gofu_param_set_color (&gp->marker.color_black_fill, 255, 255, 255, 255);
   gofu_param_set_color (&gp->marker.color_black_stroke, 255, 255, 255, 255);
   gofu_param_set_color (&gp->marker.color_none_stroke, 0, 0, 0, 255);

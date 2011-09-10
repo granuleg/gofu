@@ -7,7 +7,7 @@
 *.o
 *.scan
 *.status
-Makefile
+Makefile.in
 TAGS
 TODO.tasks
 config.h

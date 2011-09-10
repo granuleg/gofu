@@ -3,6 +3,22 @@
 #ifndef GOFU_PARAM_T
 #define GOFU_PARAM_T
 
+typedef enum _gofu_param_enum
+{
+  GRID_BACKGROUND_NO,
+  GRID_BACKGROUND_COLOR,
+  GRID_BACKGROUND_IMAGE,
+  GRID_BACKGROUND_PATTERN,
+  GRID_LIBERTY_NO,
+  GRID_LIBERTY_LINE,
+  GRID_STARPOINT_NO,
+  GRID_STARPOINT_ROUND,
+  GRID_STARPOINT_SQUARE,
+  STONE_NO,
+  STONE_PLAIN,
+  STONE_RADIAL,
+} gofu_param_enum_t;
+
 typedef struct _gofu_color_rgba
 {
   gdouble red;
@@ -13,27 +29,27 @@ typedef struct _gofu_color_rgba
 
 typedef struct _gofu_param_grid_background
 {
-  guint8 style;
+  gofu_param_enum_t style;
   gofu_color_rgba_t color;
   GString *image;
 } gofu_param_grid_background_t;
 
 typedef struct _gofu_param_grid_liberty
 {
-  guint8 style;
+  gofu_param_enum_t style;
   gofu_color_rgba_t color;
 } gofu_param_grid_liberty_t;
 
 typedef struct _gofu_param_grid_starpoint
 {
-  guint8 style;
+  gofu_param_enum_t style;
   gofu_color_rgba_t color;
 } gofu_param_grid_starpoint_t;
 
 typedef struct _gofu_param_grid
 {
-  guint8 style_boundary;
-  guint8 style_lighten;
+  gboolean style_boundary;
+  gboolean style_lighten;
   gofu_param_grid_background_t background;
   gofu_param_grid_liberty_t liberty;
   gofu_param_grid_starpoint_t starpoint;
@@ -41,7 +57,7 @@ typedef struct _gofu_param_grid
 
 typedef struct _gofu_param_stone
 {
-  guint8 style;
+  gofu_param_enum_t style;
   gofu_color_rgba_t color_black_fill;
   gofu_color_rgba_t color_black_stroke;
   gofu_color_rgba_t color_white_fill;
@@ -52,7 +68,6 @@ typedef struct _gofu_param_stone
 
 typedef struct _gofu_param_marker
 {
-  guint8 style;
   gofu_color_rgba_t color_black_fill;
   gofu_color_rgba_t color_black_stroke;
   gofu_color_rgba_t color_none_stroke;

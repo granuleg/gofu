@@ -5,15 +5,15 @@ gofu_render_grid_background (cairo_t * cr, gofu_t * gp)
 {
   switch (gp->param->grid.background.style)
     {
-    case 0:
+    case GRID_BACKGROUND_NO:
       break;
-    case 1:
+    case GRID_BACKGROUND_COLOR:
       gofu_render_grid_background_color (cr, gp);
       break;
-    case 2:
+    case GRID_BACKGROUND_IMAGE:
       gofu_render_grid_background_image (cr, gp);
       break;
-    case 3:
+    case GRID_BACKGROUND_PATTERN:
       gofu_render_grid_background_imagepattern (cr, gp);
       break;
     default:
