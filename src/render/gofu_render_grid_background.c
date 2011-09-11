@@ -24,7 +24,8 @@ gofu_render_grid_background (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 }
 
 void
-gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp, guint8 i,
+				   guint8 j)
 {
   double max_x, max_y, min_x, min_y;
   cairo_save (cr);
@@ -39,7 +40,8 @@ gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j
 }
 
 void
-gofu_render_grid_background_image (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+gofu_render_grid_background_image (cairo_t * cr, gofu_t * gp, guint8 i,
+				   guint8 j)
 {
   double max_x, max_y, min_x, min_y;
   double w, h;
@@ -63,7 +65,8 @@ gofu_render_grid_background_image (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j
 }
 
 void
-gofu_render_grid_background_imagepattern (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+gofu_render_grid_background_imagepattern (cairo_t * cr, gofu_t * gp, guint8 i,
+					  guint8 j)
 {
   double max_x, max_y, min_x, min_y;
   cairo_surface_t *image;

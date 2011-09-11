@@ -3,7 +3,7 @@
 void
 gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
- switch (gp->popu->elem[i][j].grid)
+  switch (gp->popu->elem[i][j].grid)
     {
     case GRID_NONE:
       break;
