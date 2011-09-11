@@ -1,6 +1,23 @@
 #include "gofu_render_color.h"
 
 void
+gofu_render_color (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+{
+  switch (gp->popu->elem[i][j].highlight)
+    {
+    case HIGHLIGHT_NONE:
+      break;
+    case HIGHLIGHT_HL1:
+      gofu_render_color_hl1 (cr, gp, i, j);
+      break;
+    default:
+      g_print ("%d\n", __LINE__);
+      exit (EXIT_FAILURE);
+      break;
+    }
+}
+
+void
 gofu_render_color_hl1 (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
   cairo_save (cr);

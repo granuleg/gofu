@@ -3,6 +3,25 @@
 void
 gofu_render_grid_starpoint (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
+  switch (gp->popu->elem[i][j].grid)
+    {
+    case GRID_NONE:
+      break;
+    case GRID_PLAIN:
+      break;
+    case GRID_STARPOINT:
+      gofu_render_grid_starpoint_all (cr, gp, i, j);
+      break;
+    default:
+      g_print ("%d\n", __LINE__);
+      exit (EXIT_FAILURE);
+      break;
+    }
+}
+
+void
+gofu_render_grid_starpoint_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+{
   guint8 detect;
   cairo_save (cr);
   cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));

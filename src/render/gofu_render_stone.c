@@ -1,20 +1,23 @@
 #include "gofu_render_stone.h"
 
 void
-gofu_render_stone_fill (cairo_t * cr)
+gofu_render_stone (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
-  cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
-  cairo_fill (cr);
-}
-
-void
-gofu_render_stone_fill_and_stroke (cairo_t * cr, gofu_t * gp)
-{
-  cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
-  cairo_fill_preserve (cr);
-  cairo_set_line_width (cr, gp->param_size->stone.thickness);
-  gofu_render_set_color (cr, gp->param->stone.color_black_stroke);
-  cairo_uniform_stroke (cr);
+  switch (gp->popu->elem[i][j].stone)
+    {
+    case STONE_NONE:
+      break;
+    case STONE_BLACK:
+      gofu_render_stone_black (cr, gp, i, j);
+      break;
+    case STONE_WHITE:
+      gofu_render_stone_white (cr, gp, i, j);
+      break;
+    default:
+      g_print ("%d\n", __LINE__);
+      exit (EXIT_FAILURE);
+      break;
+    }
 }
 
 void
@@ -104,4 +107,21 @@ gofu_render_stone_white_radial (cairo_t * cr, gofu_t * gp)
      cairo_set_source (cr, stone.pattern_white_radial); */
   gofu_render_stone_fill (cr);
 
+}
+
+void
+gofu_render_stone_fill (cairo_t * cr)
+{
+  cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
+  cairo_fill (cr);
+}
+
+void
+gofu_render_stone_fill_and_stroke (cairo_t * cr, gofu_t * gp)
+{
+  cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
+  cairo_fill_preserve (cr);
+  cairo_set_line_width (cr, gp->param_size->stone.thickness);
+  gofu_render_set_color (cr, gp->param->stone.color_black_stroke);
+  cairo_uniform_stroke (cr);
 }

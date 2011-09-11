@@ -3,6 +3,26 @@
 void
 gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
+ switch (gp->popu->elem[i][j].grid)
+    {
+    case GRID_NONE:
+      break;
+    case GRID_PLAIN:
+      gofu_render_grid_liberty_all (cr, gp, i, j);
+      break;
+    case GRID_STARPOINT:
+      gofu_render_grid_liberty_all (cr, gp, i, j);
+      break;
+    default:
+      g_print ("%d\n", __LINE__);
+      exit (EXIT_FAILURE);
+      break;
+    }
+}
+
+void
+gofu_render_grid_liberty_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+{
   guint8 grid, gridE, gridS, gridW, gridN;
   guint8 stone, stoneE, stoneS, stoneW, stoneN;
   guint8 detect, detectE, detectS, detectW, detectN;

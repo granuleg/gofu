@@ -37,8 +37,8 @@ gofu_param_init (gofu_param_t * gp)
 void
 gofu_param_init_grid (gofu_param_t * gp)
 {
-  gp->grid.style_boundary = FALSE;
-  gp->grid.style_lighten = FALSE;
+  gp->grid.style_boundary = TRUE;
+  gp->grid.style_lighten = TRUE;
   gofu_param_init_grid_background (gp);
   gofu_param_init_grid_liberty (gp);
   gofu_param_init_grid_starpoint (gp);
