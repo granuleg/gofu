@@ -1,24 +1,37 @@
-#include "gofu_render_color.h"
+#include "gofu_render_highlight.h"
 
 void
-gofu_render_color (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+gofu_render_highlight (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+{
+  switch (gp->highlight.style)
+    {
+    case HIGHLIGHT_NO:
+      break;
+    case HIGHLIGHT_:
+      gofu_render_highlight_all (cr, gp, i, j);
+      break;
+    default:
+      break;			// manage error TODO
+    }
+}
+
+void
+gofu_render_highlight_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
   switch (gp->popu->elem[i][j].highlight)
     {
     case HIGHLIGHT_NONE:
       break;
     case HIGHLIGHT_HL1:
-      gofu_render_color_hl1 (cr, gp, i, j);
+      gofu_render_highlight_hl1 (cr, gp, i, j);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
 }
 
 void
-gofu_render_color_hl1 (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+gofu_render_highlight_hl1 (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
   cairo_save (cr);
   cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));

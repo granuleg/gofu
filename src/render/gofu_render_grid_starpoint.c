@@ -13,9 +13,7 @@ gofu_render_grid_starpoint (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_grid_starpoint_all (cr, gp, i, j);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
 }
 
@@ -64,9 +62,7 @@ gofu_render_grid_starpoint_SE (cairo_t * cr, gofu_t * gp)
       gofu_render_grid_starpoint_SE_square (cr);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
 }
 

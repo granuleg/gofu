@@ -3,6 +3,21 @@
 void
 gofu_render_label (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
+  switch (gp->label.style)
+    {
+    case LABEL_NO:
+      break;
+    case LABEL_PLAIN:
+      gofu_render_label_all (cr, gp, i, j);
+      break;
+    default:
+      break;			// manage error TODO
+    }
+}
+
+void
+gofu_render_label_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+{
   PangoLayout *layout;
   PangoFontDescription *font_description;
   PangoRectangle ink_rect;
@@ -46,9 +61,7 @@ gofu_render_label (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_set_color (cr, gp->param->label.color_none_stroke);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// TODO manage error
     }
   pango_cairo_update_layout (cr, layout);
   cairo_move_to (cr, (-0.5 * size_x + delta_x) / PANGO_SCALE,

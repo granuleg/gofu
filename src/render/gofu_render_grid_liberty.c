@@ -14,9 +14,7 @@ gofu_render_grid_liberty (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_grid_liberty_all (cr, gp, i, j);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
 }
 
@@ -39,9 +37,9 @@ gofu_render_grid_liberty_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   gridW = gp->popu->elem[i - 1][j].grid;
   gridN = gp->popu->elem[i][j - 1].grid;
   cairo_move_to (cr, 0., 0.);
-  if (stone == STONE_NONE || gp->param->grid.style_lighten == FALSE)
+  if (stone == STONE_NONE || gp->param->grid.lighten == FALSE)
     {
-      if (gp->param->grid.style_boundary == FALSE)
+      if (gp->param->grid.boundary == FALSE)
 	{
 	  cairo_set_line_width (cr, gp->param_size->grid.liberty.thickness);
 	  if (gridE != GRID_NONE)
@@ -111,7 +109,7 @@ gofu_render_grid_liberty_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       stoneS = gp->popu->elem[i][j + 1].stone;
       stoneW = gp->popu->elem[i - 1][j].stone;
       stoneN = gp->popu->elem[i][j - 1].stone;
-      if (gp->param->grid.style_boundary == FALSE)
+      if (gp->param->grid.boundary == FALSE)
 	{
 	  cairo_set_line_width (cr, gp->param_size->grid.liberty.thickness);
 	  if (gridE != GRID_NONE && stoneE == STONE_NONE)
@@ -189,9 +187,7 @@ gofu_render_grid_liberty_E (cairo_t * cr, gofu_t * gp)
       gofu_render_grid_line_E (cr);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
 }
 

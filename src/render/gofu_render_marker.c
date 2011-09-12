@@ -9,6 +9,21 @@
 void
 gofu_render_marker (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
+  switch (gp->marker.style)
+    {
+    case MARKER_NO:
+      break;
+    case MARKER_PLAIN:
+      gofu_render_marker_all (cr, gp, i, j);
+      break;
+    default:
+      break;			// manage error TODO
+    }
+}
+
+void
+gofu_render_marker_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+{
   switch (gp->popu->elem[i][j].marker)
     {
     case MARKER_NONE:
@@ -32,9 +47,7 @@ gofu_render_marker (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_marker_square (cr, gp, i, j);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// TODO manage error
     }
 }
 
@@ -164,8 +177,6 @@ gofu_render_marker_stroke (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       cairo_uniform_stroke (cr);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// TODO manage error
     }
 }

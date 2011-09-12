@@ -14,9 +14,7 @@ gofu_render_stone (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_stone_white (cr, gp, i, j);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
 }
 
@@ -36,9 +34,7 @@ gofu_render_stone_black (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_stone_black_radial (cr, gp);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
   cairo_restore (cr);
 }
@@ -80,9 +76,7 @@ gofu_render_stone_white (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_stone_white_radial (cr, gp);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
   cairo_restore (cr);
 }

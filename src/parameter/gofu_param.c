@@ -37,8 +37,8 @@ gofu_param_init (gofu_param_t * gp)
 void
 gofu_param_init_grid (gofu_param_t * gp)
 {
-  gp->grid.style_boundary = TRUE;
-  gp->grid.style_lighten = TRUE;
+  gp->grid.boundary = TRUE;
+  gp->grid.lighten = TRUE;
   gofu_param_init_grid_background (gp);
   gofu_param_init_grid_liberty (gp);
   gofu_param_init_grid_starpoint (gp);
@@ -83,6 +83,7 @@ gofu_param_init_stone (gofu_param_t * gp)
 void
 gofu_param_init_marker (gofu_param_t * gp)
 {
+  gp->marker.style = MARKER_NO;
   gofu_param_set_color (&gp->marker.color_black_fill, 255, 255, 255, 255);
   gofu_param_set_color (&gp->marker.color_black_stroke, 255, 255, 255, 255);
   gofu_param_set_color (&gp->marker.color_none_stroke, 0, 0, 0, 255);
@@ -93,12 +94,14 @@ gofu_param_init_marker (gofu_param_t * gp)
 void
 gofu_param_init_highlight (gofu_param_t * gp)
 {
+  gp->highlight.style = HIGHLIGHT_NO;
   gofu_param_set_color (&gp->highlight.hl1, 10, 100, 100, 128);
 }
 
 void
 gofu_param_init_label (gofu_param_t * gp)
 {
+  gp->label.style = LABEL_NO;
   /*font description */
   gofu_param_set_color (&gp->label.color_black_stroke, 255, 255, 255, 255);
   gofu_param_set_color (&gp->label.color_none_stroke, 0, 0, 0, 255);

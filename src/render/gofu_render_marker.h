@@ -5,6 +5,7 @@
 #include "gofu_render_util.h"
 
 void gofu_render_marker (cairo_t *, gofu_t *, guint8, guint8);
+void gofu_render_marker_all (cairo_t *, gofu_t *, guint8, guint8);
 void gofu_render_marker_cross (cairo_t *, gofu_t *, guint8, guint8);
 void gofu_render_marker_triangle (cairo_t *, gofu_t *, guint8, guint8);
 void gofu_render_marker_diamond (cairo_t *, gofu_t *, guint8, guint8);

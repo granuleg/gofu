@@ -3,5 +3,5 @@
 #include "render/gofu_render_grid_starpoint.h"
 #include "render/gofu_render_stone.h"
 #include "render/gofu_render_marker.h"
-#include "render/gofu_render_color.h"
+#include "render/gofu_render_highlight.h"
 #include "render/gofu_render_label.h"

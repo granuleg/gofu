@@ -17,9 +17,7 @@ gofu_render_grid_background (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       gofu_render_grid_background_imagepattern (cr, gp, i, j);
       break;
     default:
-      g_print ("%d\n", __LINE__);
-      exit (EXIT_FAILURE);
-      break;
+      break;			// manage error TODO
     }
 }
 

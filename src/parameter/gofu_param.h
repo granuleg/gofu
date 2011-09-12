@@ -17,6 +17,12 @@ typedef enum _gofu_param_enum
   STONE_NO,
   STONE_PLAIN,
   STONE_RADIAL,
+  MARKER_NO,
+  MARKER_PLAIN,
+  HIGHLIGHT_NO,
+  HIGHLIGHT_COLOR,
+  LABEL_NO,
+  LABEL_PANGO
 } gofu_param_enum_t;
 
 typedef struct _gofu_color_rgba
@@ -48,8 +54,8 @@ typedef struct _gofu_param_grid_starpoint
 
 typedef struct _gofu_param_grid
 {
-  gboolean style_boundary;
-  gboolean style_lighten;
+  gboolean boundary;
+  gboolean lighten;
   gofu_param_grid_background_t background;
   gofu_param_grid_liberty_t liberty;
   gofu_param_grid_starpoint_t starpoint;
@@ -68,6 +74,7 @@ typedef struct _gofu_param_stone
 
 typedef struct _gofu_param_marker
 {
+  gofu_param_enum_t style;
   gofu_color_rgba_t color_black_fill;
   gofu_color_rgba_t color_black_stroke;
   gofu_color_rgba_t color_none_stroke;
@@ -77,11 +84,13 @@ typedef struct _gofu_param_marker
 
 typedef struct _gofu_param_highlight
 {
+  gofu_param_enum_t style;
   gofu_color_rgba_t hl1;
 } gofu_param_highlight_t;
 
 typedef struct _gofu_param_label
 {
+  gofu_param_enum_t style;
   /*font description */
   gofu_color_rgba_t color_black_stroke;
   gofu_color_rgba_t color_none_stroke;
