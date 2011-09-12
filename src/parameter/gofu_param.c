@@ -83,7 +83,7 @@ gofu_param_init_stone (gofu_param_t * gp)
 void
 gofu_param_init_marker (gofu_param_t * gp)
 {
-  gp->marker.style = MARKER_NO;
+  gp->marker.style = MARKER_PLAIN;
   gofu_param_set_color (&gp->marker.color_black_fill, 255, 255, 255, 255);
   gofu_param_set_color (&gp->marker.color_black_stroke, 255, 255, 255, 255);
   gofu_param_set_color (&gp->marker.color_none_stroke, 0, 0, 0, 255);
@@ -94,14 +94,14 @@ gofu_param_init_marker (gofu_param_t * gp)
 void
 gofu_param_init_highlight (gofu_param_t * gp)
 {
-  gp->highlight.style = HIGHLIGHT_NO;
+  gp->highlight.style = HIGHLIGHT_COLOR;
   gofu_param_set_color (&gp->highlight.hl1, 10, 100, 100, 128);
 }
 
 void
 gofu_param_init_label (gofu_param_t * gp)
 {
-  gp->label.style = LABEL_NO;
+  gp->label.style = LABEL_PLAIN;
   /*font description */
   gofu_param_set_color (&gp->label.color_black_stroke, 255, 255, 255, 255);
   gofu_param_set_color (&gp->label.color_none_stroke, 0, 0, 0, 255);

@@ -4,3 +4,6 @@
 #include <cairo/cairo-ps.h>
 
 #include "./render/gofu_render.h"
+
+gofu_t *gofu_create (guint8, guint8);
+void gofu_destroy (gofu_t *);
