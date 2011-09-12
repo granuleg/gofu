@@ -81,8 +81,8 @@ gofu_param_size_dimension (gofu_param_size_t * gp, guint8 width,
   //from description
   gp->grid.liberty.spacing_width = desc->line_spacing_width * scale;
   gp->grid.liberty.spacing_length = desc->line_spacing_length * scale;
-  gp->grid.liberty.margin_width = margin_width * scale;
-  gp->grid.liberty.margin_length = margin_length * scale;
+  gp->grid.background.margin_width = margin_width * scale;
+  gp->grid.background.margin_length = margin_length * scale;
   gp->stone.radius =
     (MIN (desc->line_spacing_width, desc->line_spacing_width) / 2) * scale;
   //from ratio size

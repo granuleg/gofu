@@ -42,7 +42,7 @@ gofu_grid_emptyneighbour (gofu_t * gp, guint8 i, guint8 j)
 }
 
 gboolean
-gofu_grid_liberty_bound_east (guint8 neighbour)
+gofu_grid_liberty_bound_detect_E (guint8 neighbour)
 {
   if ((neighbour & compass__N) || (neighbour & compass__S)
       || (neighbour & compass_NE) || (neighbour & compass_SE))
@@ -52,7 +52,7 @@ gofu_grid_liberty_bound_east (guint8 neighbour)
 }
 
 gboolean
-gofu_grid_liberty_bound_south (guint8 neighbour)
+gofu_grid_liberty_bound_detect_S (guint8 neighbour)
 {
   if ((neighbour & compass__W) || (neighbour & compass__E)
       || (neighbour & compass_SW) || (neighbour & compass_SE))
@@ -62,7 +62,7 @@ gofu_grid_liberty_bound_south (guint8 neighbour)
 }
 
 gboolean
-gofu_grid_liberty_bound_west (guint8 neighbour)
+gofu_grid_liberty_bound_detect_W (guint8 neighbour)
 {
   if ((neighbour & compass__N) || (neighbour & compass__S)
       || (neighbour & compass_NW) || (neighbour & compass_SW))
@@ -72,7 +72,7 @@ gofu_grid_liberty_bound_west (guint8 neighbour)
 }
 
 gboolean
-gofu_grid_liberty_bound_north (guint8 neighbour)
+gofu_grid_liberty_bound_detect_N (guint8 neighbour)
 {
   if ((neighbour & compass__W) || (neighbour & compass__E)
       || (neighbour & compass_NW) || (neighbour & compass_NE))

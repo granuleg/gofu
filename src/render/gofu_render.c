@@ -66,52 +66,52 @@ gofu_render_senseilibrary (gofu_t * gp)
 	      ascii = '?';
 	      break;
 	    }
-	  switch (gp->popu->elem[i][j].stone)
-	    {
-	    case STONE_NONE:
-	      break;
-	    case STONE_BLACK:
-	      ascii = 'X';
-	      break;
-	    case STONE_WHITE:
-	      ascii = '0';
-	      break;
-	    default:
-	      ascii = '?';
-	      break;
-	    }
-	  switch (gp->popu->elem[i][j].marker)
-	    {
-	    case MARKER_NONE:
-	      break;
-	    case MARKER_CROSS:
-	      if (gp->popu->elem[i][j].stone == STONE_BLACK)
-		ascii = 'Z';
-	      else if (gp->popu->elem[i][j].stone == STONE_WHITE)
-		ascii = 'P';
-	      else
-		ascii = 'M';
-	      break;
-	    case MARKER_TRIANGLE:
-	      if (gp->popu->elem[i][j].stone == STONE_BLACK)
-		ascii = 'Y';
-	      else if (gp->popu->elem[i][j].stone == STONE_WHITE)
-		ascii = 'Q';
-	      else
-		ascii = 'T';
-	      break;
-	    case MARKER_DIAMOND:
-	      if (gp->popu->elem[i][j].stone == STONE_BLACK)
-		ascii = 'B';
-	      else if (gp->popu->elem[i][j].stone == STONE_WHITE)
-		ascii = 'W';
-	      else
-		ascii = 'C';
-	      break;
-	    default:
-	      ascii = '?';
-	      break;
-	    }
+	  /* switch (gp->popu->elem[i][j].stone) */
+	  /*   { */
+	  /*   case STONE_NONE: */
+	  /*     break; */
+	  /*   case STONE_BLACK: */
+	  /*     ascii = 'X'; */
+	  /*     break; */
+	  /*   case STONE_WHITE: */
+	  /*     ascii = '0'; */
+	  /*     break; */
+	  /*   default: */
+	  /*     ascii = '?'; */
+	  /*     break; */
+	  /*   } */
+	  /* switch (gp->popu->elem[i][j].marker) */
+	  /*   { */
+	  /*   case MARKER_NONE: */
+	  /*     break; */
+	  /*   case MARKER_CROSS: */
+	  /*     if (gp->popu->elem[i][j].stone == STONE_BLACK) */
+	  /*    ascii = 'Z'; */
+	  /*     else if (gp->popu->elem[i][j].stone == STONE_WHITE) */
+	  /*    ascii = 'P'; */
+	  /*     else */
+	  /*    ascii = 'M'; */
+	  /*     break; */
+	  /*   case MARKER_TRIANGLE: */
+	  /*     if (gp->popu->elem[i][j].stone == STONE_BLACK) */
+	  /*    ascii = 'Y'; */
+	  /*     else if (gp->popu->elem[i][j].stone == STONE_WHITE) */
+	  /*    ascii = 'Q'; */
+	  /*     else */
+	  /*    ascii = 'T'; */
+	  /*     break; */
+	  /*   case MARKER_DIAMOND: */
+	  /*     if (gp->popu->elem[i][j].stone == STONE_BLACK) */
+	  /*    ascii = 'B'; */
+	  /*     else if (gp->popu->elem[i][j].stone == STONE_WHITE) */
+	  /*    ascii = 'W'; */
+	  /*     else */
+	  /*    ascii = 'C'; */
+	  /*     break; */
+	  /*   default: */
+	  /*     ascii = '?'; */
+	  /*     break; */
+	  /*   } */
 	  g_print ("%c ", ascii);
 	}
       g_print ("\n");

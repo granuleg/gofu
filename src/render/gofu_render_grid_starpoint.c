@@ -21,6 +21,8 @@ void
 gofu_render_grid_starpoint_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
   guint8 detect;
+  if (gp->popu->elem[i][j].stone != STONE_NONE)
+    return;
   cairo_save (cr);
   cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
   cairo_scale (cr, gp->param_size->grid.starpoint.radius,

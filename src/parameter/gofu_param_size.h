@@ -29,14 +29,19 @@ typedef struct _gofu_param_size_ratio_thickness
   gdouble unbound_stone;
 } gofu_param_size_ratio_thickness_t;
 
+
+typedef struct _gofu_param_size_grid_background
+{
+  gdouble margin_width;
+  gdouble margin_length;
+} gofu_param_size_grid_background_t;
+
 typedef struct _gofu_param_size_grid_liberty
 {
   gdouble thickness;
   gdouble thickness_bound;
   gdouble spacing_width;
   gdouble spacing_length;
-  gdouble margin_width;
-  gdouble margin_length;
 } gofu_param_size_grid_liberty_t;
 
 typedef struct _gofu_param_size_grid_starpoint
@@ -47,6 +52,7 @@ typedef struct _gofu_param_size_grid_starpoint
 
 typedef struct _gofu_param_size_grid
 {
+  gofu_param_size_grid_background_t background;
   gofu_param_size_grid_liberty_t liberty;
   gofu_param_size_grid_starpoint_t starpoint;
 } gofu_param_size_grid_t;

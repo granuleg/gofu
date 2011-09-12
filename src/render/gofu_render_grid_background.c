@@ -25,15 +25,42 @@ void
 gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp, guint8 i,
 				   guint8 j)
 {
-  double max_x, max_y, min_x, min_y;
+  double max_width, min_width, max_length, min_length;
+  double x, y, width, length;
+  guint8 grid, gridE, gridS, gridW, gridN;
   cairo_save (cr);
-  min_x = gofu_move_width (gp, 0);
-  min_y = gofu_move_length (gp, 0);
-  max_x = gofu_move_width (gp, gp->popu->width + 1);
-  max_y = gofu_move_length (gp, gp->popu->length + 1);
-  gofu_render_set_color (cr, gp->param->grid.background.color);
-  cairo_rectangle (cr, min_x, min_y, max_x, max_y);
-  cairo_fill (cr);
+  cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
+  grid = gp->popu->elem[i][j].grid;
+  gridE = gp->popu->elem[i + 1][j].grid;
+  gridS = gp->popu->elem[i][j + 1].grid;
+  gridW = gp->popu->elem[i - 1][j].grid;
+  gridN = gp->popu->elem[i][j - 1].grid;
+  max_width = gp->param_size->grid.background.margin_width;
+  min_width = gp->param_size->grid.liberty.spacing_width / 2.0;
+  max_length = gp->param_size->grid.background.margin_length;
+  min_length = gp->param_size->grid.liberty.spacing_length / 2.0;
+  if (gridW == GRID_NONE)
+    x = max_width;
+  else
+    x = min_width;
+  if (gridE == GRID_NONE)
+    width = x + max_width;
+  else
+    width = x + min_width;
+  if (gridN == GRID_NONE)
+    y = max_length;
+  else
+    y = min_length;
+  if (gridS == GRID_NONE)
+    length = y + max_length;
+  else
+    length = y + min_length;
+  if (grid != GRID_NONE)
+    {
+      gofu_render_set_color (cr, gp->param->grid.background.color);
+      cairo_rectangle (cr, -x, -y, width, length);
+      cairo_fill (cr);
+    }
   cairo_restore (cr);
 }
 

@@ -62,10 +62,10 @@ gofu_render_grid_liberty_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       else
 	{
 	  detect = gofu_grid_emptyneighbour (gp, i, j);
-	  detectE = gofu_grid_liberty_bound_east (detect);
-	  detectS = gofu_grid_liberty_bound_south (detect);
-	  detectW = gofu_grid_liberty_bound_west (detect);
-	  detectN = gofu_grid_liberty_bound_north (detect);
+	  detectE = gofu_grid_liberty_bound_detect_E (detect);
+	  detectS = gofu_grid_liberty_bound_detect_S (detect);
+	  detectW = gofu_grid_liberty_bound_detect_W (detect);
+	  detectN = gofu_grid_liberty_bound_detect_N (detect);
 	  cairo_set_line_width (cr, gp->param_size->grid.liberty.thickness);
 	  if (gridE != GRID_NONE && !(detectE))
 	    gofu_render_grid_liberty_E (cr, gp);
@@ -132,10 +132,10 @@ gofu_render_grid_liberty_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
       else
 	{
 	  detect = gofu_grid_emptyneighbour (gp, i, j);
-	  detectE = gofu_grid_liberty_bound_east (detect);
-	  detectS = gofu_grid_liberty_bound_south (detect);
-	  detectW = gofu_grid_liberty_bound_west (detect);
-	  detectN = gofu_grid_liberty_bound_north (detect);
+	  detectE = gofu_grid_liberty_bound_detect_E (detect);
+	  detectS = gofu_grid_liberty_bound_detect_S (detect);
+	  detectW = gofu_grid_liberty_bound_detect_W (detect);
+	  detectN = gofu_grid_liberty_bound_detect_N (detect);
 	  cairo_set_line_width (cr, gp->param_size->grid.liberty.thickness);
 	  if (gridE != GRID_NONE && stoneE == STONE_NONE && !(detectE))
 	    gofu_render_grid_liberty_E (cr, gp);
