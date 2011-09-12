@@ -3,11 +3,11 @@
 void
 gofu_render_highlight (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
-  switch (gp->highlight.style)
+  switch (gp->param->highlight.style)
     {
     case HIGHLIGHT_NO:
       break;
-    case HIGHLIGHT_:
+    case HIGHLIGHT_COLOR:
       gofu_render_highlight_all (cr, gp, i, j);
       break;
     default:

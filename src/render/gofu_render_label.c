@@ -3,7 +3,7 @@
 void
 gofu_render_label (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
-  switch (gp->label.style)
+  switch (gp->param->label.style)
     {
     case LABEL_NO:
       break;

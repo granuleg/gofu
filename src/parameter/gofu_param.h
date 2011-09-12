@@ -22,7 +22,7 @@ typedef enum _gofu_param_enum
   HIGHLIGHT_NO,
   HIGHLIGHT_COLOR,
   LABEL_NO,
-  LABEL_PANGO
+  LABEL_PLAIN
 } gofu_param_enum_t;
 
 typedef struct _gofu_color_rgba

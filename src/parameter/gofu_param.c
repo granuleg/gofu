@@ -47,7 +47,7 @@ gofu_param_init_grid (gofu_param_t * gp)
 void
 gofu_param_init_grid_background (gofu_param_t * gp)
 {
-  gp->grid.background.style = GRID_BACKGROUND_COLOR;
+  gp->grid.background.style = GRID_BACKGROUND_NO;
   gofu_param_set_color (&gp->grid.background.color, 222, 176, 109, 255);
   gp->grid.background.image = g_string_new ("background.png");
 }
@@ -69,7 +69,7 @@ gofu_param_init_grid_starpoint (gofu_param_t * gp)
 void
 gofu_param_init_stone (gofu_param_t * gp)
 {
-  gp->stone.style = STONE_PLAIN;
+  gp->stone.style = STONE_NO;
   gofu_param_set_color (&gp->stone.color_black_stroke, 0, 0, 0, 255);
   gofu_param_set_color (&gp->stone.color_black_fill, 0, 0, 0, 255);
   gofu_param_set_color (&gp->stone.color_white_stroke, 0, 0, 0, 255);

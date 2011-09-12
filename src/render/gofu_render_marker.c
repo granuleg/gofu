@@ -9,7 +9,7 @@
 void
 gofu_render_marker (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 {
-  switch (gp->marker.style)
+  switch (gp->param->marker.style)
     {
     case MARKER_NO:
       break;
