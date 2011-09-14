@@ -15,7 +15,7 @@ typedef enum _gofu_param_enum
   GRID_STARPOINT_SQUARE,
   STONE_NO,
   STONE_PLAIN,
-  STONE_RADIAL,
+  STONE_IMAGE,
   MARKER_NO,
   MARKER_PLAIN,
   HIGHLIGHT_NO,
@@ -121,3 +121,4 @@ void gofu_param_init_highlight (gofu_param_t *);
 void gofu_param_init_label (gofu_param_t *);
 void gofu_param_set_color (gofu_color_rgba_t *, guint8, guint8, guint8,
 			   guint8);
+gofu_color_rgba_t *gofu_param_invert_color (gofu_color_rgba_t *);

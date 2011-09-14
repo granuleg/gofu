@@ -34,7 +34,8 @@ main (void)
   cairo_surface_t *surface;
   cairo_t *cr;
   gofu_t *gp;
-  gp = gofu_create (G_MAXUINT8 - 2, G_MAXUINT8 - 2);
+  //gp = gofu_create (G_MAXUINT8 - 2, G_MAXUINT8 - 2);
+  gp = gofu_create (17, 17);
   surface =
     cairo_pdf_surface_create ("gofu.pdf", gp->param_size->surface_width,
 			      gp->param_size->surface_length);

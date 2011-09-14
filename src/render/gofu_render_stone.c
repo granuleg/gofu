@@ -30,8 +30,8 @@ gofu_render_stone_black (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
     case STONE_PLAIN:
       gofu_render_stone_black_plain (cr, gp);
       break;
-    case STONE_RADIAL:
-      gofu_render_stone_black_radial (cr, gp);
+    case STONE_IMAGE:
+      gofu_render_stone_black_image (cr, gp);
       break;
     default:
       break;			// manage error TODO
@@ -51,13 +51,9 @@ gofu_render_stone_black_plain (cairo_t * cr, gofu_t * gp)
 }
 
 void
-gofu_render_stone_black_radial (cairo_t * cr, gofu_t * gp)
+gofu_render_stone_black_image (cairo_t * cr, gofu_t * gp)
 {
-  cairo_scale (cr, gp->param_size->stone.radius,
-	       gp->param_size->stone.radius);
-  /*TODO
-     cairo_set_source (cr, gp->param->stone.pattern_black_radial); */
-  gofu_render_stone_fill (cr);
+  /* TODO */
 }
 
 void
@@ -72,8 +68,8 @@ gofu_render_stone_white (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
     case STONE_PLAIN:
       gofu_render_stone_white_plain (cr, gp);
       break;
-    case STONE_RADIAL:
-      gofu_render_stone_white_radial (cr, gp);
+    case STONE_IMAGE:
+      gofu_render_stone_white_image (cr, gp);
       break;
     default:
       break;			// manage error TODO
@@ -93,14 +89,9 @@ gofu_render_stone_white_plain (cairo_t * cr, gofu_t * gp)
 }
 
 void
-gofu_render_stone_white_radial (cairo_t * cr, gofu_t * gp)
+gofu_render_stone_white_image (cairo_t * cr, gofu_t * gp)
 {
-  cairo_scale (cr, gp->param_size->stone.radius,
-	       gp->param_size->stone.radius);
-  /*TODO
-     cairo_set_source (cr, stone.pattern_white_radial); */
-  gofu_render_stone_fill (cr);
-
+  /* TODO */
 }
 
 void

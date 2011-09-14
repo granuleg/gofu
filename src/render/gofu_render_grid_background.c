@@ -19,15 +19,33 @@ gofu_render_grid_background (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 }
 
 void
-gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp, guint8 i,
-				   guint8 j)
+gofu_render_grid_background_overlap (cairo_t * cr, gofu_t * gp, guint8 i,
+				     guint8 j)
+{
+  switch (gp->param->grid.background.style)
+    {
+    case GRID_BACKGROUND_NO:
+      break;
+    case GRID_BACKGROUND_COLOR:
+      gofu_render_grid_background_color_overlap (cr, gp, i, j);
+      break;
+    case GRID_BACKGROUND_IMAGE:
+      gofu_render_grid_background_image_overlap (cr, gp, i, j);
+      break;
+    default:
+      break;			// manage error TODO
+    }
+}
+
+void
+gofu_render_grid_background_color_overlap (cairo_t * cr, gofu_t * gp,
+					   guint8 i, guint8 j)
 {
   double max_width, min_width, max_length, min_length;
   double x, y, width, length;
-  guint8 grid, gridE, gridS, gridW, gridN;
+  guint8 gridE, gridS, gridW, gridN;
   cairo_save (cr);
   cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
-  grid = gp->popu->elem[i][j].grid;
   gridE = gp->popu->elem[i + 1][j].grid;
   gridS = gp->popu->elem[i][j + 1].grid;
   gridW = gp->popu->elem[i - 1][j].grid;
@@ -52,12 +70,23 @@ gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp, guint8 i,
     length = y + max_length;
   else
     length = y + min_length;
-  if (grid != GRID_NONE)
-    {
-      gofu_render_set_color (cr, gp->param->grid.background.color);
-      cairo_rectangle (cr, -x, -y, width, length);
-      cairo_fill (cr);
-    }
+  gofu_render_set_color (cr, gp->param->grid.background.color);
+  cairo_rectangle (cr, -x, -y, width, length);
+  cairo_fill (cr);
+  cairo_restore (cr);
+}
+
+void
+gofu_render_grid_background_color (cairo_t * cr, gofu_t * gp, guint8 i,
+				   guint8 j)
+{
+  cairo_save (cr);
+  cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
+  cairo_scale (cr, gp->param_size->grid.liberty.spacing_width,
+	       gp->param_size->grid.liberty.spacing_length);
+  gofu_render_set_color (cr, gp->param->grid.background.color);
+  cairo_rectangle (cr, -0.5, -0.5, 1., 1.);
+  cairo_fill (cr);
   cairo_restore (cr);
 }
 
@@ -84,4 +113,11 @@ gofu_render_grid_background_image (cairo_t * cr, gofu_t * gp, guint8 i,
   cairo_fill (cr);
   cairo_surface_destroy (image);
   cairo_restore (cr);
+}
+
+void
+gofu_render_grid_background_image_overlap (cairo_t * cr, gofu_t * gp,
+					   guint8 i, guint8 j)
+{
+  return;
 }

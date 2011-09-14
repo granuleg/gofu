@@ -9,15 +9,28 @@ gofu_render_pangocairo (cairo_t * cr, gofu_t * gp)
     {
       for (j = 1; j <= gp->popu->length; j++)
 	{
-	  gofu_render_grid_background (cr, gp, i, j);
-	  gofu_render_grid_liberty (cr, gp, i, j);
-	  gofu_render_grid_starpoint (cr, gp, i, j);
-	  gofu_render_stone (cr, gp, i, j);
-	  gofu_render_marker (cr, gp, i, j);
-	  if ((g_strcmp0 ((gp->popu->elem[i][j].label)->str, "") != 0)
-	      && (gp->popu->elem[i][j].marker == MARKER_NONE))
-	    gofu_render_label (cr, gp, i, j);
-	  gofu_render_highlight (cr, gp, i, j);
+	  if (gp->popu->elem[i][j].grid != GRID_NONE)
+	    {
+	      gofu_render_grid_background_overlap (cr, gp, i, j);
+	    }
+	}
+    }
+  for (i = 1; i <= gp->popu->width; i++)
+    {
+      for (j = 1; j <= gp->popu->length; j++)
+	{
+	  if (gp->popu->elem[i][j].grid != GRID_NONE)
+	    {
+	      gofu_render_grid_background (cr, gp, i, j);
+	      gofu_render_grid_liberty (cr, gp, i, j);
+	      gofu_render_grid_starpoint (cr, gp, i, j);
+	      gofu_render_stone (cr, gp, i, j);
+	      gofu_render_marker (cr, gp, i, j);
+	      if ((g_strcmp0 ((gp->popu->elem[i][j].label)->str, "") != 0)
+		  && (gp->popu->elem[i][j].marker == MARKER_NONE))
+		gofu_render_label (cr, gp, i, j);
+	      gofu_render_highlight (cr, gp, i, j);
+	    }
 	}
     }
 }

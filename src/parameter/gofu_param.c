@@ -70,11 +70,12 @@ void
 gofu_param_init_stone (gofu_param_t * gp)
 {
   gp->stone.style = STONE_PLAIN;
+  /*color stone */
   gofu_param_set_color (&gp->stone.color_black_stroke, 0, 0, 0, 255);
   gofu_param_set_color (&gp->stone.color_black_fill, 0, 0, 0, 255);
   gofu_param_set_color (&gp->stone.color_white_stroke, 0, 0, 0, 255);
   gofu_param_set_color (&gp->stone.color_white_fill, 255, 255, 255, 255);
-  /*gradient stone should be computed from stone color */
+  /* image stone */
   gp->stone.image_black = g_string_new ("stone_black.png");
   gp->stone.image_white = g_string_new ("stone_white.png");
   /*multiple image should be computed from stone image name */
@@ -116,4 +117,12 @@ gofu_param_set_color (gofu_color_rgba_t * rgba, guint8 red, guint8 green,
   rgba->green = (gdouble) green / (gdouble) G_MAXUINT8;
   rgba->blue = (gdouble) blue / (gdouble) G_MAXUINT8;
   rgba->alpha = (gdouble) alpha / (gdouble) G_MAXUINT8;
+}
+
+gofu_color_rgba_t *
+gofu_param_invert_color (gofu_color_rgba_t * rgba)
+{
+  rgba->red = (gdouble) 1.0 - rgba->red;
+  rgba->green = (gdouble) 1.0 - rgba->green;
+  rgba->blue = (gdouble) 1.0 - rgba->blue;
 }
