@@ -69,7 +69,7 @@ gofu_param_init_grid_starpoint (gofu_param_t * gp)
 void
 gofu_param_init_stone (gofu_param_t * gp)
 {
-  gp->stone.style = STONE_PLAIN;
+  gp->stone.style = STONE_IMAGE;
   /*color stone */
   gofu_param_set_color (&gp->stone.color_black_stroke, 0, 0, 0, 255);
   gofu_param_set_color (&gp->stone.color_black_fill, 0, 0, 0, 255);

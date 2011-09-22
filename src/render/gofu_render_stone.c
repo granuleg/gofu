@@ -53,7 +53,8 @@ gofu_render_stone_black_plain (cairo_t * cr, gofu_t * gp)
 void
 gofu_render_stone_black_image (cairo_t * cr, gofu_t * gp)
 {
-  /* TODO */
+  gofu_render_stone_paint (cr, gp,
+			   "/home/granule/Developpement/gofu/src/render/black.png");
 }
 
 void
@@ -91,14 +92,26 @@ gofu_render_stone_white_plain (cairo_t * cr, gofu_t * gp)
 void
 gofu_render_stone_white_image (cairo_t * cr, gofu_t * gp)
 {
-  /* TODO */
+  gofu_render_stone_paint (cr, gp,
+			   "/home/granule/Developpement/gofu/src/render/white.png");
 }
 
 void
-gofu_render_stone_fill (cairo_t * cr)
+gofu_render_stone_paint (cairo_t * cr, gofu_t * gp, const char *image)
 {
-  cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
-  cairo_fill (cr);
+  int w, h;
+  cairo_surface_t *cs;
+
+  cs = cairo_image_surface_create_from_png (image);
+  w = cairo_image_surface_get_width (cs);
+  h = cairo_image_surface_get_height (cs);
+  cairo_scale (cr, 2 * gp->param_size->stone.radius / w,
+	       2 * gp->param_size->stone.radius / h);
+  cairo_arc (cr, 0., 0., w / 2.0, 0., 2 * M_PI);
+  cairo_clip (cr);
+  cairo_set_source_surface (cr, cs, -w / 2.0, -h / 2.0);
+  cairo_paint (cr);
+  cairo_surface_destroy (cs);
 }
 
 void
