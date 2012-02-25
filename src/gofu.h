@@ -5,5 +5,5 @@
 
 #include "./render/gofu_render.h"
 
-gofu_t *gofu_create (guint8, guint8);
+gofu_t *gofu_create (guint8, guint8, gdouble, gdouble);
 void gofu_destroy (gofu_t *);
