@@ -101,8 +101,8 @@ void gofu_param_size_dimension (gofu_param_size_t *,
 				gofu_param_size_ratio_size_t *,
 				gofu_param_size_ratio_thickness_t *);
 void gofu_param_size_starpoint (gofu_param_size_t *, guint8, guint8);
-GSList * gofu_grid_starpoint_tengen (GSList *, guint8, guint8);
+GSList *gofu_grid_starpoint_tengen (GSList *, guint8, guint8);
 guint8 gofu_grid_starpoint_corner_delta (guint8, guint8);
-GSList * gofu_grid_starpoint_corner (GSList *, guint8, guint8, guint8);
-GSList * gofu_grid_starpoint_side (GSList *, guint8, guint8, guint8);
-GSList * gofu_list_prepend_xy (GSList *, guint8, guint8);
+GSList *gofu_grid_starpoint_corner (GSList *, guint8, guint8, guint8);
+GSList *gofu_grid_starpoint_side (GSList *, guint8, guint8, guint8);
+GSList *gofu_list_prepend_xy (GSList *, guint8, guint8);

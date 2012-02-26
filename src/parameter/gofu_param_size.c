@@ -25,8 +25,8 @@ void
 gofu_param_size_free (gofu_param_size_t * gp)
 {
   GSList *list = gp->grid.starpoint.list;
-  for(list; list; list = g_slist_next(list))
-      g_free(list->data);
+  for (list; list; list = g_slist_next (list))
+    g_free (list->data);
   g_slist_free (gp->grid.starpoint.list);
   g_free ((gpointer) gp);
 }
@@ -122,7 +122,7 @@ gofu_param_size_starpoint (gofu_param_size_t * gp, guint8 width,
 {
   guint8 delta;
   GSList *list = NULL;
-  guint8 i,j;
+  guint8 i, j;
   list = gofu_grid_starpoint_tengen (list, width, length);
   delta = gofu_grid_starpoint_corner_delta (width, length);
   if (delta != 0)
@@ -137,7 +137,7 @@ GSList *
 gofu_grid_starpoint_tengen (GSList * list, guint8 width, guint8 length)
 {
   if ((width % 2 == 1) && (length % 2 == 1))
-      list = gofu_list_prepend_xy (list, 1 + (width / 2), 1 + (length / 2));
+    list = gofu_list_prepend_xy (list, 1 + (width / 2), 1 + (length / 2));
   return list;
 }
 
@@ -173,7 +173,7 @@ gofu_grid_starpoint_corner (GSList * list, guint8 width, guint8 length,
   return list;
 }
 
-GSList*
+GSList *
 gofu_grid_starpoint_side (GSList * list, guint8 width, guint8 length,
 			  guint8 delta)
 {
@@ -194,9 +194,8 @@ GSList *
 gofu_list_prepend_xy (GSList * list, guint8 x, guint8 y)
 {
   gdouble *loc;
-  if ((loc =
-       (gdouble *) g_malloc (2 * sizeof (gdouble))) == NULL)
-    return NULL; //TODO manage error
+  if ((loc = (gdouble *) g_malloc (2 * sizeof (gdouble))) == NULL)
+    return NULL;		//TODO manage error
   loc[0] = x;
   loc[1] = y;
   list = g_slist_prepend (list, loc);

@@ -37,7 +37,7 @@ gofu_render_grid_liberty_line (cairo_t * cr, gofu_t * gp, gboolean bound)
   max_length = gofu_move_length (gp, gp->popu->length);
   min_width = gofu_move_width (gp, 1);
   max_width = gofu_move_width (gp, gp->popu->width);
-  /*draw vertical line without border*/
+  /*draw vertical line without border */
   for (i = 2; i <= gp->popu->width - 1; i++)
     {
       c = gofu_move_width (gp, i);
@@ -45,7 +45,7 @@ gofu_render_grid_liberty_line (cairo_t * cr, gofu_t * gp, gboolean bound)
       cairo_line_to (cr, c, max_length);
       cairo_stroke (cr);
     }
-  /*draw horizontal line without border*/
+  /*draw horizontal line without border */
   for (i = 2; i <= gp->popu->length - 1; i++)
     {
       c = gofu_move_length (gp, i);
@@ -53,11 +53,12 @@ gofu_render_grid_liberty_line (cairo_t * cr, gofu_t * gp, gboolean bound)
       cairo_line_to (cr, max_width, c);
       cairo_stroke (cr);
     }
-  /*draw border*/
+  /*draw border */
   if (bound == TRUE)
     cairo_set_line_width (cr, gp->param_size->grid.liberty.thickness_bound);
-  cairo_rectangle(cr, min_width, min_length, max_width - min_width,max_length - min_length);
-  cairo_stroke(cr);
+  cairo_rectangle (cr, min_width, min_length, max_width - min_width,
+		   max_length - min_length);
+  cairo_stroke (cr);
   cairo_restore (cr);
 }
 
@@ -69,10 +70,12 @@ gofu_render_grid_starpoint (cairo_t * cr, gofu_t * gp)
     case GRID_STARPOINT_NO:
       break;
     case GRID_STARPOINT_ROUND:
-      gofu_render_grid_starpoint_elem(cr, gp, &gofu_render_grid_starpoint_round);
+      gofu_render_grid_starpoint_elem (cr, gp,
+				       &gofu_render_grid_starpoint_round);
       break;
     case GRID_STARPOINT_SQUARE:
-      gofu_render_grid_starpoint_elem(cr, gp, &gofu_render_grid_starpoint_square);
+      gofu_render_grid_starpoint_elem (cr, gp,
+				       &gofu_render_grid_starpoint_square);
       break;
     default:
       break;			// manage error TODO
@@ -80,14 +83,16 @@ gofu_render_grid_starpoint (cairo_t * cr, gofu_t * gp)
 }
 
 void
-gofu_render_grid_starpoint_elem (cairo_t * cr, gofu_t * gp, void (*f) (gofu_t *cr))
+gofu_render_grid_starpoint_elem (cairo_t * cr, gofu_t * gp,
+				 void (*f) (cairo_t * cr))
 {
   guint8 i, j;
   GSList *temp;
-  for(temp = gp->param_size->grid.starpoint.list; temp; temp = g_slist_next(temp)) 
+  for (temp = gp->param_size->grid.starpoint.list; temp;
+       temp = g_slist_next (temp))
     {
-      i = ((gdouble *)(temp->data))[0];
-      j = ((gdouble *)(temp->data))[1];
+      i = ((gdouble *) (temp->data))[0];
+      j = ((gdouble *) (temp->data))[1];
       cairo_save (cr);
       cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
       cairo_scale (cr, gp->param_size->grid.starpoint.radius,
@@ -95,12 +100,12 @@ gofu_render_grid_starpoint_elem (cairo_t * cr, gofu_t * gp, void (*f) (gofu_t *c
       gofu_cairo_set_color (cr, gp->param->grid.starpoint.color);
       cairo_set_line_width (cr, gp->param_size->grid.starpoint.thickness);
       cairo_move_to (cr, 0., 0.);
-      (*f)(cr);
+      (*f) (cr);
       cairo_rotate (cr, G_PI_2);
       cairo_fill_preserve (cr);
       gofu_cairo_uniform_stroke (cr);
       cairo_restore (cr);
-  }
+    }
 }
 
 void
