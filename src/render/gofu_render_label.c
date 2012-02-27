@@ -52,13 +52,13 @@ gofu_render_label_all (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   switch (gp->popu->elem[i][j].stone)
     {
     case STONE_BLACK:
-      gofu_render_set_color (cr, gp->param->label.color_black_stroke);
+      gofu_cairo_set_color (cr, gp->param->label.color_black_stroke);
       break;
     case STONE_WHITE:
-      gofu_render_set_color (cr, gp->param->label.color_white_stroke);
+      gofu_cairo_set_color (cr, gp->param->label.color_white_stroke);
       break;
     case STONE_NONE:
-      gofu_render_set_color (cr, gp->param->label.color_none_stroke);
+      gofu_cairo_set_color (cr, gp->param->label.color_none_stroke);
       break;
     default:
       break;			// TODO manage error

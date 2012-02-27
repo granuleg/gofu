@@ -161,20 +161,20 @@ gofu_render_marker_stroke (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
   switch (gp->popu->elem[i][j].stone)
     {
     case STONE_BLACK:
-      gofu_render_set_color (cr, gp->param->marker.color_black_fill);
+      gofu_cairo_set_color (cr, gp->param->marker.color_black_fill);
       cairo_fill_preserve (cr);
-      gofu_render_set_color (cr, gp->param->marker.color_black_stroke);
-      cairo_uniform_stroke (cr);
+      gofu_cairo_set_color (cr, gp->param->marker.color_black_stroke);
+      gofu_cairo_uniform_stroke (cr);
       break;
     case STONE_NONE:
-      gofu_render_set_color (cr, gp->param->marker.color_none_stroke);
-      cairo_uniform_stroke (cr);
+      gofu_cairo_set_color (cr, gp->param->marker.color_none_stroke);
+      gofu_cairo_uniform_stroke (cr);
       break;
     case STONE_WHITE:
-      gofu_render_set_color (cr, gp->param->marker.color_white_fill);
+      gofu_cairo_set_color (cr, gp->param->marker.color_white_fill);
       cairo_fill_preserve (cr);
-      gofu_render_set_color (cr, gp->param->marker.color_white_stroke);
-      cairo_uniform_stroke (cr);
+      gofu_cairo_set_color (cr, gp->param->marker.color_white_stroke);
+      gofu_cairo_uniform_stroke (cr);
       break;
     default:
       break;			// TODO manage error

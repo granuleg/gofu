@@ -1,9 +1,3 @@
-# ./render/gofu_render_stone.c \
-# ./render/gofu_render_stone.h \
-# ./render/gofu_render_marker.c \
-# ./render/gofu_render_marker.h \
-# ./render/gofu_render_label.c \
-# ./render/gofu_render_label.h 
 bin_PROGRAMS = gofu
 gofu_SOURCES = \
 ./parameter/gofu_param.c \
@@ -17,6 +11,12 @@ gofu_SOURCES = \
 ./render/gofu_render_grid.h \
 ./render/gofu_render_background.c \
 ./render/gofu_render_background.h \
+./render/gofu_render_stone.c \
+./render/gofu_render_stone.h \
+./render/gofu_render_marker.c \
+./render/gofu_render_marker.h \
+./render/gofu_render_label.c \
+./render/gofu_render_label.h \
 gofu.c \
 gofu.h
 

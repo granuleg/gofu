@@ -1,17 +1,17 @@
 #include "gofu_render_stone.h"
 
 void
-gofu_render_stone (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+gofu_render_stone (cairo_t * cr, gofu_t * gp)
 {
-  switch (gp->popu->elem[i][j].stone)
+  switch (gp->param->stone.style)
     {
-    case STONE_NONE:
+    case STONE_NO:
       break;
-    case STONE_BLACK:
-      gofu_render_stone_black (cr, gp, i, j);
+    case STONE_PLAIN:
+      gofu_render_stones_plain (cr, gp);
       break;
-    case STONE_WHITE:
-      gofu_render_stone_white (cr, gp, i, j);
+    case STONE_IMAGE:
+      gofu_render_stones_image (cr, gp);
       break;
     default:
       break;			// manage error TODO
@@ -19,85 +19,101 @@ gofu_render_stone (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
 }
 
 void
-gofu_render_stone_black (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
+gofu_render_stones_plain (cairo_t * cr, gofu_t * gp)
 {
-  cairo_save (cr);
-  cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
-  switch (gp->param->stone.style)
+  guint8 i, j;
+  for (i = 1; i <= gp->popu->width; i++)
     {
-    case STONE_NO:
-      break;
-    case STONE_PLAIN:
-      gofu_render_stone_black_plain (cr, gp);
-      break;
-    case STONE_IMAGE:
-      gofu_render_stone_black_image (cr, gp);
-      break;
-    default:
-      break;			// manage error TODO
+      for (j = 1; j <= gp->popu->length; j++)
+	{
+	  switch (gp->popu->elem[i][j].stone)
+	    {
+	    case STONE_NONE:
+	      break;
+	    case STONE_BLACK:
+	      cairo_save (cr);
+	      cairo_translate (cr, gofu_move_width (gp, i),
+			       gofu_move_length (gp, j));
+	      gofu_render_stone_black_plain (cr, gp);
+	      cairo_restore (cr);
+	      break;
+	    case STONE_WHITE:
+	      cairo_save (cr);
+	      cairo_translate (cr, gofu_move_width (gp, i),
+			       gofu_move_length (gp, j));
+	      gofu_render_stone_white_plain (cr, gp);
+	      cairo_restore (cr);
+	      break;
+	    default:
+	      break;		// manage error TODO
+	    }
+	}
     }
-  cairo_restore (cr);
+}
+
+void
+gofu_render_stones_image (cairo_t * cr, gofu_t * gp)
+{
+  guint8 i, j;
+  for (i = 1; i <= gp->popu->width; i++)
+    {
+      for (j = 1; j <= gp->popu->length; j++)
+	{
+	  switch (gp->popu->elem[i][j].stone)
+	    {
+	    case STONE_NONE:
+	      break;
+	    case STONE_BLACK:
+	      cairo_save (cr);
+	      cairo_translate (cr, gofu_move_width (gp, i),
+			       gofu_move_length (gp, j));
+	      gofu_render_stone_black_image (cr, gp);
+	      cairo_restore (cr);
+	      break;
+	    case STONE_WHITE:
+	      cairo_save (cr);
+	      cairo_translate (cr, gofu_move_width (gp, i),
+			       gofu_move_length (gp, j));
+	      gofu_render_stone_white_image (cr, gp);
+	      cairo_restore (cr);
+	      break;
+	    default:
+	      break;		// manage error TODO
+	    }
+	}
+    }
 }
 
 void
 gofu_render_stone_black_plain (cairo_t * cr, gofu_t * gp)
 {
-  cairo_scale (cr,
-	       gp->param_size->stone.radius - gp->param_size->stone.thickness,
-	       gp->param_size->stone.radius -
-	       gp->param_size->stone.thickness);
-  gofu_render_set_color (cr, gp->param->stone.color_black_fill);
-  gofu_render_stone_fill_and_stroke (cr, gp);
-}
-
-void
-gofu_render_stone_black_image (cairo_t * cr, gofu_t * gp)
-{
-  gofu_render_stone_paint (cr, gp,
-			   "/home/granule/Developpement/gofu/src/render/black.png");
-}
-
-void
-gofu_render_stone_white (cairo_t * cr, gofu_t * gp, guint8 i, guint8 j)
-{
-  cairo_save (cr);
-  cairo_translate (cr, gofu_move_width (gp, i), gofu_move_length (gp, j));
-  switch (gp->param->stone.style)
-    {
-    case STONE_NO:
-      break;
-    case STONE_PLAIN:
-      gofu_render_stone_white_plain (cr, gp);
-      break;
-    case STONE_IMAGE:
-      gofu_render_stone_white_image (cr, gp);
-      break;
-    default:
-      break;			// manage error TODO
-    }
-  cairo_restore (cr);
+  gdouble s;
+  s = gp->param_size->stone.radius - gp->param_size->stone.thickness;
+  cairo_scale (cr, s, s);
+  gofu_cairo_set_color (cr, gp->param->stone.color_black_fill);
+  cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
+  cairo_fill_preserve (cr);
+  cairo_set_line_width (cr, gp->param_size->stone.thickness);
+  gofu_cairo_set_color (cr, gp->param->stone.color_black_stroke);
+  gofu_cairo_uniform_stroke (cr);
 }
 
 void
 gofu_render_stone_white_plain (cairo_t * cr, gofu_t * gp)
 {
-  cairo_scale (cr,
-	       gp->param_size->stone.radius - gp->param_size->stone.thickness,
-	       gp->param_size->stone.radius -
-	       gp->param_size->stone.thickness);
-  gofu_render_set_color (cr, gp->param->stone.color_white_fill);
-  gofu_render_stone_fill_and_stroke (cr, gp);
+  gdouble s;
+  s = gp->param_size->stone.radius - gp->param_size->stone.thickness;
+  cairo_scale (cr, s, s);
+  gofu_cairo_set_color (cr, gp->param->stone.color_white_fill);
+  cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
+  cairo_fill_preserve (cr);
+  cairo_set_line_width (cr, gp->param_size->stone.thickness);
+  gofu_cairo_set_color (cr, gp->param->stone.color_white_stroke);
+  gofu_cairo_uniform_stroke (cr);
 }
 
 void
-gofu_render_stone_white_image (cairo_t * cr, gofu_t * gp)
-{
-  gofu_render_stone_paint (cr, gp,
-			   "/home/granule/Developpement/gofu/src/render/white.png");
-}
-
-void
-gofu_render_stone_paint (cairo_t * cr, gofu_t * gp, const char *image)
+gofu_render_stone_image (cairo_t * cr, gofu_t * gp, const char *image)
 {
   int w, h;
   cairo_surface_t *cs;
@@ -115,11 +131,15 @@ gofu_render_stone_paint (cairo_t * cr, gofu_t * gp, const char *image)
 }
 
 void
-gofu_render_stone_fill_and_stroke (cairo_t * cr, gofu_t * gp)
+gofu_render_stone_black_image (cairo_t * cr, gofu_t * gp)
 {
-  cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
-  cairo_fill_preserve (cr);
-  cairo_set_line_width (cr, gp->param_size->stone.thickness);
-  gofu_render_set_color (cr, gp->param->stone.color_black_stroke);
-  cairo_uniform_stroke (cr);
+  gofu_render_stone_image (cr, gp,
+			   "/home/granule/Developpement/gofu/src/render/black.png");
+}
+
+void
+gofu_render_stone_white_image (cairo_t * cr, gofu_t * gp)
+{
+  gofu_render_stone_image (cr, gp,
+			   "/home/granule/Developpement/gofu/src/render/white.png");
 }

@@ -101,7 +101,6 @@ gofu_render_grid_starpoint_elem (cairo_t * cr, gofu_t * gp,
       cairo_set_line_width (cr, gp->param_size->grid.starpoint.thickness);
       cairo_move_to (cr, 0., 0.);
       (*f) (cr);
-      cairo_rotate (cr, G_PI_2);
       cairo_fill_preserve (cr);
       gofu_cairo_uniform_stroke (cr);
       cairo_restore (cr);
