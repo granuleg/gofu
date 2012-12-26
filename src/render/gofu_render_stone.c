@@ -134,12 +134,12 @@ void
 gofu_render_stone_black_image (cairo_t * cr, gofu_t * gp)
 {
   gofu_render_stone_image (cr, gp,
-			   "/home/granule/Developpement/gofu/src/render/black.png");
+			   "./black.png");
 }
 
 void
 gofu_render_stone_white_image (cairo_t * cr, gofu_t * gp)
 {
   gofu_render_stone_image (cr, gp,
-			   "/home/granule/Developpement/gofu/src/render/white.png");
+			   "./white.png");
 }

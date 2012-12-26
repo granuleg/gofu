@@ -1,8 +1,8 @@
-# Granule configure.ac
+# configure.ac
 
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.67])
-AC_INIT([gofu], [0.0], [kiwitargetgranule@gmail.com])
+AC_INIT([gofu], [0.0], [granuleg@gmail.com])
 AC_CONFIG_SRCDIR([src/gofu.c])
 AC_CONFIG_HEADERS([config.h])
 
